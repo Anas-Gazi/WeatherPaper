@@ -1,0 +1,3 @@
+add_executable(test_scaling_and_fit test_scaling_and_fit.cpp)
+target_link_libraries(test_scaling_and_fit PRIVATE weatherpaper::scaling_and_fit wp_thirdparty_doctest)
+add_test(NAME scaling_and_fit COMMAND test_scaling_and_fit)

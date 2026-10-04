@@ -1,0 +1,7 @@
+{
+  "id": "bundled-default",
+  "name": "WeatherPaper Default",
+  "version": "1.0.0",
+  "description": "The offline, always-available default theme bundled with WeatherPaper. Covers all 4 time-of-day buckets plus 9 exact weather+time combinations; every other combination resolves via wallpaper_engine_core's fallback chain (see Resolver::resolve).",
+  "license": "CC0-1.0 (placeholder solid-color art - see README.md in this folder)"
+}

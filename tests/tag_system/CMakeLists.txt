@@ -1,0 +1,3 @@
+add_executable(test_tag_system test_tag_system.cpp)
+target_link_libraries(test_tag_system PRIVATE weatherpaper::tag_system wp_thirdparty_doctest)
+add_test(NAME tag_system COMMAND test_tag_system)

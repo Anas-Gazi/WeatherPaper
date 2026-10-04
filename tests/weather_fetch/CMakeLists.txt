@@ -1,0 +1,3 @@
+add_executable(test_weather_fetch test_weather_fetch.cpp)
+target_link_libraries(test_weather_fetch PRIVATE weatherpaper::weather_fetch wp_thirdparty_doctest)
+add_test(NAME weather_fetch COMMAND test_weather_fetch)

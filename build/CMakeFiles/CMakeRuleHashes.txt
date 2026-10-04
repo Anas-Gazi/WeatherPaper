@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+2733a26c43abeeb940a630863d35ad2e src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen
+8dad4a910231626665d3d7a1d3b77499 src/modules/settings_ui/wp_settings_ui_autogen/timestamp

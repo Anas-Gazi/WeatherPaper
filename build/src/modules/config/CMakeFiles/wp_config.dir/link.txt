@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_config.a CMakeFiles/wp_config.dir/src/config.cpp.o
+/usr/bin/ranlib libweatherpaper_config.a

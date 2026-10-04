@@ -1,0 +1,12 @@
+time_of_day 6 0.000662396
+scaling_and_fit 6 0.000797773
+tag_system 6 0.000836873
+wallpaper_engine_core 6 0.000828131
+config 6 0.000916784
+render_engine 6 0.00289373
+weather_fetch 6 0.00238145
+asset_manager 6 0.0108338
+updater 6 0.00153702
+notify 6 0.000860212
+platform_linux_backend 6 0.00097246
+---

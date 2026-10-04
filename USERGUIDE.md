@@ -1,0 +1,132 @@
+# WeatherPaper — User Guide
+
+WeatherPaper changes your desktop wallpaper to match the weather and time
+of day where you live. This guide covers day-to-day use. If you're a
+developer looking to build or extend the app, see
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and [`ARCHITECTURE.md`](ARCHITECTURE.md)
+instead.
+
+## What you'll see
+
+Once running, WeatherPaper sits quietly in your system tray. Every 15–30
+minutes (configurable) it checks the weather for your location and, if the
+condition or time-of-day has changed enough to warrant it, crossfades to a
+new wallpaper that matches — for example, a rainy evening scene, or a
+clear night sky.
+
+If you're offline, it keeps showing the last wallpaper it successfully
+resolved from cached weather data. If you've *never* been online (or the
+cache is unreadable), it falls back to a bundled default appropriate for
+the season.
+
+## The tray icon
+
+Right-click (or left-click, depending on your desktop) the tray icon for:
+
+- **Pause / Resume auto-updates** — temporarily stop WeatherPaper from
+  checking the weather or changing your wallpaper, without quitting it.
+- **Refresh Now** — force an immediate weather check and wallpaper update,
+  instead of waiting for the next scheduled poll.
+- **Open Settings...** — opens the settings window (see below).
+- **Open Gallery...** — jumps straight to the Gallery tab of the settings
+  window, where your own wallpapers live.
+- **Quit WeatherPaper**
+
+## The settings window
+
+The settings window has five sections, listed down the left side:
+
+### General
+
+- **Location** — auto-detected by default; toggle off to enter one
+  manually if auto-detection isn't available on your system yet.
+- **Units** — Celsius or Fahrenheit, used for temperature display and for
+  the "extreme heat/cold" severe-weather threshold.
+- **Weather update interval** — how often WeatherPaper checks the weather,
+  from 15 to 30 minutes. Lower values are more responsive but use slightly
+  more network/battery.
+
+### Themes
+
+Browse and manage installed theme packs. Each theme pack is a themed
+collection of wallpapers, already tagged for you by weather and time of
+day — install one and it's immediately usable. Uninstalling a pack removes
+its images and its tags, but never anything from your own Gallery.
+
+### Gallery
+
+Your own wallpapers. Two ways to add one:
+
+1. **Drag and drop** an image or video file straight onto the list.
+2. Click **Add File...** and pick one from a file browser.
+
+Accepted formats: **PNG, JPG, WebP** for images; **MP4, WebM** for video.
+Anything else (including executables) is rejected — this is a safety
+feature, not a bug.
+
+After adding a file, tag it with the weather conditions and times of day
+it fits (e.g. "rain" + "night"), and choose how it should be sized on
+screen:
+
+| Fit mode | What it does |
+|---|---|
+| **Fill** | Crops to fill the screen with no distortion — may cut off edges. Good default for photos. |
+| **Fit** | Shows the whole image, adding bars on the sides or top/bottom if it doesn't match your screen's shape. |
+| **Stretch** | Forces the image to exactly fill the screen — may distort proportions. |
+| **Center** | Shows the image at its original size, centered, with no resizing at all. |
+| **Tile** | Repeats the image at its original size to cover the screen — useful for small pattern images. |
+
+If you add a very large image (over 4K resolution) or video (over 100MB),
+you'll get a warning about potential performance impact — you can still
+add it if you want to.
+
+A wallpaper can have more than one tag (e.g. both "rainy" and "evening"),
+and more than one wallpaper can share the same tags — WeatherPaper will
+rotate between them.
+
+### Performance
+
+- **Enable animated/video wallpapers** — off by default. Turning this on
+  lets video/looping wallpapers play instead of just static images, at the
+  cost of higher CPU/GPU and battery use. Recommended only on machines
+  with a dedicated or reasonably capable integrated GPU.
+- **Pause animated wallpaper when...** — screen is locked / a fullscreen
+  app or game is active / battery saver is on. All on by default, so
+  animated wallpapers never compete with your game's frame rate or drain
+  your battery unnecessarily.
+
+### About / Updates
+
+Shows the currently installed versions of the core engine, the settings
+UI, and the asset catalog — these update independently of each other, so
+you might get a new theme pack without a full app update, or vice versa.
+**Check for Updates** looks for newer versions of any of the three.
+
+## Severe weather alerts
+
+Off by default. If enabled, WeatherPaper will show a system notification
+for storms or extreme temperatures, sourced from the same weather check
+that drives your wallpaper — it never makes an extra network call just for
+this.
+
+## Troubleshooting
+
+**My wallpaper never changes.** Check that at least one theme pack (the
+bundled default counts) is installed, and that your system clock/timezone
+is correct — sunrise/sunset calculations depend on it.
+
+**Wallpaper doesn't fill the whole screen the way I expect.** Check the
+fit mode for that specific image in the Gallery tab — it's set per-image,
+not globally.
+
+**On Linux, nothing happens at all.** WeatherPaper needs to recognize your
+desktop environment to know how to set the wallpaper. It supports GNOME,
+KDE Plasma, XFCE, Cinnamon, MATE, Hyprland, and Sway out of the box, with a
+generic fallback for other X11 window managers (via `feh`, if installed).
+If none of these match your setup, please file an issue — see
+`CONTRIBUTING.md` for how to help add support for your desktop environment.
+
+**Video wallpaper doesn't appear even though I enabled it.** This is a
+known current limitation — see `ARCHITECTURE.md`'s verification-status
+notes. Static wallpapers are fully supported; video wallpaper rendering is
+still being finished.

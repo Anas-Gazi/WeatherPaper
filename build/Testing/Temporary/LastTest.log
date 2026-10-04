@@ -1,0 +1,234 @@
+Start testing: Oct 05 01:17 +06
+----------------------------------------------------------
+1/11 Testing: time_of_day
+1/11 Test: time_of_day
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/time_of_day/test_time_of_day"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/time_of_day
+"time_of_day" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:  8 |  8 passed | 0 failed | 0 skipped
+[doctest] assertions: 31 | 31 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"time_of_day" end time: Oct 05 01:17 +06
+"time_of_day" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/11 Testing: scaling_and_fit
+2/11 Test: scaling_and_fit
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/scaling_and_fit/test_scaling_and_fit"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/scaling_and_fit
+"scaling_and_fit" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 12 | 12 passed | 0 failed | 0 skipped
+[doctest] assertions: 67 | 67 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"scaling_and_fit" end time: Oct 05 01:17 +06
+"scaling_and_fit" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/11 Testing: tag_system
+3/11 Test: tag_system
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/tag_system/test_tag_system"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/tag_system
+"tag_system" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 11 | 11 passed | 0 failed | 0 skipped
+[doctest] assertions: 92 | 92 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"tag_system" end time: Oct 05 01:17 +06
+"tag_system" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/11 Testing: wallpaper_engine_core
+4/11 Test: wallpaper_engine_core
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/wallpaper_engine_core/test_wallpaper_engine_core"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/wallpaper_engine_core
+"wallpaper_engine_core" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 11 | 11 passed | 0 failed | 0 skipped
+[doctest] assertions: 39 | 39 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"wallpaper_engine_core" end time: Oct 05 01:17 +06
+"wallpaper_engine_core" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/11 Testing: config
+5/11 Test: config
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/config/test_config"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/config
+"config" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:  6 |  6 passed | 0 failed | 0 skipped
+[doctest] assertions: 30 | 30 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"config" end time: Oct 05 01:17 +06
+"config" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/11 Testing: render_engine
+6/11 Test: render_engine
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/render_engine/test_render_engine"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/render_engine
+"render_engine" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 13 | 13 passed | 0 failed | 0 skipped
+[doctest] assertions: 74 | 74 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"render_engine" end time: Oct 05 01:17 +06
+"render_engine" time elapsed: 00:00:00
+----------------------------------------------------------
+
+7/11 Testing: weather_fetch
+7/11 Test: weather_fetch
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/weather_fetch/test_weather_fetch"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/weather_fetch
+"weather_fetch" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 13 | 13 passed | 0 failed | 0 skipped
+[doctest] assertions: 49 | 49 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"weather_fetch" end time: Oct 05 01:17 +06
+"weather_fetch" time elapsed: 00:00:00
+----------------------------------------------------------
+
+8/11 Testing: asset_manager
+8/11 Test: asset_manager
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/asset_manager/test_asset_manager"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/asset_manager
+"asset_manager" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 17 | 17 passed | 0 failed | 0 skipped
+[doctest] assertions: 65 | 65 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.07 sec
+----------------------------------------------------------
+Test Passed.
+"asset_manager" end time: Oct 05 01:17 +06
+"asset_manager" time elapsed: 00:00:00
+----------------------------------------------------------
+
+9/11 Testing: updater
+9/11 Test: updater
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/updater/test_updater"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/updater
+"updater" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 13 | 13 passed | 0 failed | 0 skipped
+[doctest] assertions: 39 | 39 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"updater" end time: Oct 05 01:17 +06
+"updater" time elapsed: 00:00:00
+----------------------------------------------------------
+
+10/11 Testing: notify
+10/11 Test: notify
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/notify/test_notify"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/notify
+"notify" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases:  5 |  5 passed | 0 failed | 0 skipped
+[doctest] assertions: 10 | 10 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"notify" end time: Oct 05 01:17 +06
+"notify" time elapsed: 00:00:00
+----------------------------------------------------------
+
+11/11 Testing: platform_linux_backend
+11/11 Test: platform_linux_backend
+Command: "/home/anas/Downloads/WeatherPaper/build/tests/platform_linux/test_platform_linux_backend"
+Directory: /home/anas/Downloads/WeatherPaper/build/tests/platform_linux
+"platform_linux_backend" start time: Oct 05 01:17 +06
+Output:
+----------------------------------------------------------
+[doctest] doctest version is "2.4.11"
+[doctest] run with "--help" for options
+===============================================================================
+[doctest] test cases: 20 | 20 passed | 0 failed | 0 skipped
+[doctest] assertions: 68 | 68 passed | 0 failed |
+[doctest] Status: SUCCESS!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"platform_linux_backend" end time: Oct 05 01:17 +06
+"platform_linux_backend" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 05 01:17 +06

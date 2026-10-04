@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_notify.a CMakeFiles/wp_notify.dir/src/notify.cpp.o CMakeFiles/wp_notify.dir/src/notify_linux.cpp.o CMakeFiles/wp_notify.dir/src/notify_windows.cpp.o
+/usr/bin/ranlib libweatherpaper_notify.a

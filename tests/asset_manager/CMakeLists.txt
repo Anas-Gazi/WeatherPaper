@@ -1,0 +1,3 @@
+add_executable(test_asset_manager test_asset_manager.cpp)
+target_link_libraries(test_asset_manager PRIVATE weatherpaper::asset_manager wp_thirdparty_doctest)
+add_test(NAME asset_manager COMMAND test_asset_manager)

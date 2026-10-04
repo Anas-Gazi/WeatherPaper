@@ -1,0 +1,3 @@
+add_executable(test_wallpaper_engine_core test_wallpaper_engine_core.cpp)
+target_link_libraries(test_wallpaper_engine_core PRIVATE weatherpaper::wallpaper_engine_core wp_thirdparty_doctest)
+add_test(NAME wallpaper_engine_core COMMAND test_wallpaper_engine_core)

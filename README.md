@@ -1,0 +1,100 @@
+# WeatherPaper
+
+A cross-platform, modular, live weather-reactive wallpaper engine for
+**Windows 10/11** and **Linux** (GNOME, KDE Plasma, XFCE, Cinnamon, MATE,
+Hyprland, Sway). WeatherPaper automatically changes your desktop wallpaper
+based on live weather conditions and real sunrise/sunset-based time of day
+— and it's also a general-purpose static/video wallpaper engine you can
+drive with your own tagged images and clips.
+
+Built in C++20 for a small footprint (installer target: under 25MB), zero
+busy-polling, and full offline unit-testability.
+
+## What it does
+
+- Watches live weather (via [Open-Meteo](https://open-meteo.com), no
+  API key required) and switches wallpaper by condition — sunny, cloudy,
+  rain, snow, storm, fog, clear.
+- Computes time of day (morning/day/evening/night) from **real**
+  sunrise/sunset for your location, not fixed clock hours.
+- Supports static images and (opt-in, for capable hardware) short
+  looped video wallpapers.
+- Every wallpaper — bundled, downloaded, or your own — is matched by a
+  simple tag system, editable in the settings UI.
+- Downloadable theme packs, signed and checksum-verified.
+- Works fully offline: caches the last known weather, and falls back to
+  a bundled seasonal default if there's no cache at all.
+- Idle CPU near 0% — everything is event/timer-driven, nothing
+  busy-loops.
+- HTTPS-only networking, checksummed + signature-verified downloads,
+  no shell-injection surface anywhere file paths reach a subprocess.
+
+## Status
+
+This is a from-scratch build with a genuinely modular architecture and a
+real, passing test suite — **129 unit tests across 11 suites, all green**
+— covering every OS-independent module. The Linux platform backend (DE
+detection + wallpaper-setting) is fully implemented and tested too, and the
+whole pipeline has been run end-to-end in this repository's build
+environment.
+
+The Windows platform backend and the WorkerW-style video-wallpaper
+compositor are written but **not yet verified on real hardware** — see
+[`ARCHITECTURE.md`](ARCHITECTURE.md) section "Verification status" for the
+exact, honest breakdown of what's tested versus what's a well-documented
+first draft, and [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to help close
+that gap.
+
+## Quick start (build from source)
+
+```bash
+sudo apt-get install cmake build-essential libssl-dev libcurl4-openssl-dev
+cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build build -j$(nproc)
+ctest --test-dir build --output-on-failure
+./build/src/app/weatherpaperd --once
+```
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full build matrix
+(Windows, optional FFmpeg/tray/settings-UI components) and
+[`USERGUIDE.md`](USERGUIDE.md) for how to actually use the app once built.
+
+## Documentation map
+
+| Document | For |
+|---|---|
+| [`USERGUIDE.md`](USERGUIDE.md) | End users — installing, configuring, adding your own wallpapers |
+| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Contributors — module map, dependency rules, security posture, verification status |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contributors — build instructions, adding a Linux DE backend, adding a theme pack |
+| [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) | New contributors — "where do I find X", "how do I extend Y" quick-reference |
+
+## Repository layout
+
+```
+WeatherPaper/
+├── src/
+│   ├── modules/            # 13 independent modules, each with its own CMakeLists.txt
+│   ├── platform/
+│   │   ├── windows/        # Win32/COM wallpaper + OS-hooks backend
+│   │   └── linux/          # DE-detection + argv-based wallpaper backend
+│   └── app/                # weatherpaperd entry point (main.cpp)
+├── tests/                  # one doctest suite per testable module
+├── assets/default_theme/   # bundled offline default theme (placeholder art)
+├── third_party/            # vendored doctest + nlohmann/json (header-only)
+├── ARCHITECTURE.md
+├── CONTRIBUTING.md
+├── USERGUIDE.md
+├── DEVELOPER_GUIDE.md
+└── CMakeLists.txt
+```
+
+## License
+
+Not yet specified in this drop — add a `LICENSE` file matching your
+project's chosen license before distributing. The vendored third-party
+libraries (`doctest`, MIT; `nlohmann/json`, MIT) retain their own licenses
+regardless.
+
+
+cd /home/anas/Downloads/WeatherPaper
+./build/src/app/weatherpaperd 

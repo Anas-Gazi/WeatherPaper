@@ -1,0 +1,3 @@
+add_executable(test_time_of_day test_time_of_day.cpp)
+target_link_libraries(test_time_of_day PRIVATE weatherpaper::time_of_day wp_thirdparty_doctest)
+add_test(NAME time_of_day COMMAND test_time_of_day)

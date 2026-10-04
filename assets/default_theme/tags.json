@@ -1,0 +1,32 @@
+{
+  "format_version": 1,
+  "assets": [
+    { "id": "morning_default", "file": "images/morning_default.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["morning"] },
+    { "id": "day_default", "file": "images/day_default.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["day"] },
+    { "id": "evening_default", "file": "images/evening_default.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["evening"] },
+    { "id": "night_default", "file": "images/night_default.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["night"] },
+
+    { "id": "clear_day", "file": "images/clear_day.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["clear", "day"] },
+    { "id": "clear_night", "file": "images/clear_night.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["clear", "night"] },
+    { "id": "sunny_day", "file": "images/sunny_day.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["sunny", "day"] },
+    { "id": "rain_day", "file": "images/rain_day.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["rain", "day"] },
+    { "id": "rain_night", "file": "images/rain_night.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["rain", "night"] },
+    { "id": "snow_day", "file": "images/snow_day.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["snow", "day"] },
+    { "id": "storm_night", "file": "images/storm_night.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["storm", "night"] },
+    { "id": "fog_morning", "file": "images/fog_morning.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["fog", "morning"] },
+    { "id": "cloudy_evening", "file": "images/cloudy_evening.jpg", "type": "image",
+      "fit_mode": "fill", "tags": ["cloudy", "evening"] }
+  ]
+}

@@ -1,0 +1,29 @@
+# Module: settings_ui (Section 3.12) - Qt Widgets.
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+
+set(CMAKE_AUTOMOC ON)
+
+add_library(wp_settings_ui STATIC
+    src/settings_ui.cpp
+    include/weatherpaper/settings_ui/settings_ui.hpp
+)
+
+target_include_directories(wp_settings_ui
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+)
+
+target_link_libraries(wp_settings_ui
+    PUBLIC
+        Qt6::Widgets
+        weatherpaper::config
+        weatherpaper::tag_system
+        weatherpaper::asset_manager
+        weatherpaper::scaling_and_fit
+)
+
+target_compile_features(wp_settings_ui PUBLIC cxx_std_20)
+set_target_properties(wp_settings_ui PROPERTIES OUTPUT_NAME "weatherpaper_settings_ui")
+
+add_library(weatherpaper::settings_ui ALIAS wp_settings_ui)

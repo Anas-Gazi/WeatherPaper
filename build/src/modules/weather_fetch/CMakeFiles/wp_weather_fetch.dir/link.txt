@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_weather_fetch.a CMakeFiles/wp_weather_fetch.dir/src/weather_fetch.cpp.o
+/usr/bin/ranlib libweatherpaper_weather_fetch.a

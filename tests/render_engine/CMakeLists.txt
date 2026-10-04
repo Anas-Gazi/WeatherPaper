@@ -1,0 +1,3 @@
+add_executable(test_render_engine test_render_engine.cpp)
+target_link_libraries(test_render_engine PRIVATE weatherpaper::render_engine wp_thirdparty_doctest)
+add_test(NAME render_engine COMMAND test_render_engine)

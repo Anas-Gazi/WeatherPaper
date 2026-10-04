@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_updater.a CMakeFiles/wp_updater.dir/src/updater.cpp.o
+/usr/bin/ranlib libweatherpaper_updater.a

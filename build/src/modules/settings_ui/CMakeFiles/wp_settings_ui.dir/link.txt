@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_settings_ui.a CMakeFiles/wp_settings_ui.dir/wp_settings_ui_autogen/mocs_compilation.cpp.o CMakeFiles/wp_settings_ui.dir/src/settings_ui.cpp.o
+/usr/bin/ranlib libweatherpaper_settings_ui.a

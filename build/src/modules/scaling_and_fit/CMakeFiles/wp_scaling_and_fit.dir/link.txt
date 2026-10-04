@@ -1,0 +1,2 @@
+/usr/bin/ar qc libweatherpaper_scaling_and_fit.a CMakeFiles/wp_scaling_and_fit.dir/src/scaling_and_fit.cpp.o
+/usr/bin/ranlib libweatherpaper_scaling_and_fit.a
