@@ -88,11 +88,6 @@ WeatherPaper/
 └── CMakeLists.txt
 ```
 
-## License
-
-Not yet specified in this drop — add a `LICENSE` file matching your
-project's chosen license before distributing. The vendored third-party
-libraries (`doctest`, MIT; `nlohmann/json`, MIT) retain their own licenses
 regardless.
 
 
