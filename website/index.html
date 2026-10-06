@@ -53,29 +53,23 @@
       </p>
 
       <div class="hero-actions">
-        <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run" id="hero-download-btn" class="btn btn-accent btn-lg">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download for Linux (One-Click)
+        <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-Setup.exe" id="hero-download-btn" class="btn btn-accent btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/>
+          </svg>
+          Download for Windows 10 &amp; 11 (.exe)
         </a>
-        <a href="#how-to-use" class="btn btn-secondary btn-lg">How It Works</a>
+        <a href="#download" class="btn btn-secondary btn-lg">All Download Options</a>
       </div>
 
-      <div class="terminal-install-box">
-        <span>$</span>
-        <code>chmod +x weatherpaper-installer.run &amp;&amp; ./weatherpaper-installer.run</code>
-        <button class="copy-btn" data-code="chmod +x weatherpaper-installer.run &amp;&amp; ./weatherpaper-installer.run" title="Copy to clipboard">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-      </div>
-
-      <div class="platform-badges">
-        <span>🐧 Ubuntu &amp; Debian</span>
+      <div class="platform-badges" style="margin-top: 18px;">
+        <span>🪟 Windows 11 Certified</span>
         <span>•</span>
-        <span>🎩 Fedora &amp; Arch</span>
+        <span>🪟 Windows 10</span>
         <span>•</span>
-        <span>🪟 Windows 10 &amp; 11</span>
+        <span>🐧 Linux (Ubuntu, Debian, Arch, Fedora)</span>
         <span>•</span>
-        <span>⚡ 100% Free &amp; Open Source</span>
+        <span>⚡ 0% Idle CPU</span>
       </div>
 
       <!-- App Showcase Preview Frame -->
@@ -178,23 +172,67 @@
 
       <div class="os-toggle-container">
         <div class="os-toggle">
-          <button class="os-toggle-btn active" data-os="linux">
+          <button class="os-toggle-btn active" data-os="windows">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/></svg>
+            Windows 10 &amp; 11
+          </button>
+          <button class="os-toggle-btn" data-os="linux">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.001 2c-3.14 0-5.405 2.502-5.405 5.86 0 1.58.46 3.12 1.34 4.38-2.6 1.4-4.22 4.14-4.22 7.24 0 .84.68 1.52 1.52 1.52h13.53c.84 0 1.52-.68 1.52-1.52 0-3.1-1.62-5.84-4.22-7.24.88-1.26 1.34-2.8 1.34-4.38 0-3.358-2.265-5.86-5.405-5.86z"/></svg>
             Linux
-          </button>
-          <button class="os-toggle-btn" data-os="windows">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/></svg>
-            Windows 10 / 11
           </button>
         </div>
       </div>
 
+      <!-- Windows Install Cards Panel (Default Active) -->
+      <div class="install-cards-grid" id="windows-install-panel">
+        <!-- 1. Windows Setup Installer -->
+        <div class="install-card recommended">
+          <span class="card-badge">Easiest (1-Click)</span>
+          <h3 class="install-card-title">⚡ Windows Setup Installer (.exe)</h3>
+          <p class="install-card-desc">Single-click setup file for Windows 10 and Windows 11. Sets up all application files, desktop shortcuts, and autostart automatically.</p>
+
+          <ul class="install-steps">
+            <li><span class="step-number">1</span> Click the <strong>Download</strong> button below.</li>
+            <li><span class="step-number">2</span> Double-click <code>WeatherPaper-Setup.exe</code> to run.</li>
+            <li><span class="step-number">3</span> Done! WeatherPaper opens in your system tray and starts immediately.</li>
+          </ul>
+
+          <div class="card-footer-action">
+            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-Setup.exe" class="btn btn-accent" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/>
+              </svg>
+              Download WeatherPaper-Setup.exe (151 KB)
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Windows Portable Package -->
+        <div class="install-card">
+          <span class="card-badge" style="background: #64748b;">Portable</span>
+          <h3 class="install-card-title">📁 Standalone Portable ZIP</h3>
+          <p class="install-card-desc">Zero installation required. Extract anywhere (folder or USB flash drive) and run directly without administrative rights.</p>
+
+          <ul class="install-steps">
+            <li><span class="step-number">1</span> Download the portable <code>.zip</code> package.</li>
+            <li><span class="step-number">2</span> Right-click → <strong>Extract All...</strong></li>
+            <li><span class="step-number">3</span> Double-click <code>install-portable.bat</code> to enable startup on boot.</li>
+          </ul>
+
+          <div class="card-footer-action">
+            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip" class="btn btn-secondary" style="width: 100%;">
+              Download Portable .zip (740 KB)
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- Linux Install Cards Panel -->
-      <div class="install-cards-grid" id="linux-install-panel">
+      <div class="install-cards-grid" id="linux-install-panel" style="display: none;">
         <!-- 1. One-Click Installer -->
         <div class="install-card recommended">
           <span class="card-badge">Easiest</span>
-          <h3 class="install-card-title">⚡ One-Click Installer</h3>
+          <h3 class="install-card-title">⚡ One-Click Linux Installer</h3>
           <p class="install-card-desc">Self-extracting binary that sets up all files, desktop menu shortcuts, and login autostart automatically without root.</p>
           
           <div class="command-snippet">
@@ -238,74 +276,6 @@
           <div class="card-footer-action">
             <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb" class="btn btn-secondary" style="width: 100%;">
               Download <code>weatherpaper-0.1.0-Linux.deb</code> (332 KB)
-            </a>
-          </div>
-        </div>
-
-        <!-- 3. Portable Tarball -->
-        <div class="install-card">
-          <h3 class="install-card-title">📦 Portable Archive (.tar.gz)</h3>
-          <p class="install-card-desc">Universal standalone tarball for any Linux distribution (Arch, Fedora, openSUSE, Alpine, Void).</p>
-
-          <div class="command-snippet">
-            <code>tar -xzf weatherpaper-*.tar.gz</code>
-            <button class="copy-btn" data-code="tar -xzf weatherpaper-0.1.0-Linux.tar.gz" title="Copy">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            </button>
-          </div>
-
-          <ul class="install-steps">
-            <li><span class="step-number">1</span> Extract to any folder of your choice.</li>
-            <li><span class="step-number">2</span> Run <code>./bin/weatherpaperd</code> directly.</li>
-            <li><span class="step-number">3</span> Zero global system modifications.</li>
-          </ul>
-
-          <div class="card-footer-action">
-            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz" class="btn btn-secondary" style="width: 100%;">
-              Download <code>weatherpaper-0.1.0-Linux.tar.gz</code> (325 KB)
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Windows Install Cards Panel -->
-      <div class="install-cards-grid" id="windows-install-panel" style="display: none;">
-        <!-- 1. Windows One-Click Download -->
-        <div class="install-card recommended">
-          <span class="card-badge">1-Click Download</span>
-          <h3 class="install-card-title">⚡ One-Click Windows Package</h3>
-          <p class="install-card-desc">Zero install hassle. Download with 1 click, extract, and WeatherPaper starts running immediately on Windows 10 or 11.</p>
-
-          <ul class="install-steps">
-            <li><span class="step-number">1</span> Click the <strong>Download</strong> button below.</li>
-            <li><span class="step-number">2</span> Right-click the downloaded <code>.zip</code> file and click <strong>Extract All...</strong></li>
-            <li><span class="step-number">3</span> Double-click <code>install-portable.bat</code> to enable dynamic wallpapers on Windows startup. Done!</li>
-          </ul>
-
-          <div class="card-footer-action">
-            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip" class="btn btn-accent" style="width: 100%;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/>
-              </svg>
-              Download for Windows (One-Click)
-            </a>
-          </div>
-        </div>
-
-        <!-- 2. Windows Setup Information -->
-        <div class="install-card">
-          <h3 class="install-card-title">🪟 Windows Setup Installer (.exe)</h3>
-          <p class="install-card-desc">Standard Windows Setup executable with desktop shortcut and Add/Remove Programs integration.</p>
-
-          <ul class="install-steps">
-            <li><span class="step-number">1</span> Download the Windows installer package.</li>
-            <li><span class="step-number">2</span> Run the guided installer wizard.</li>
-            <li><span class="step-number">3</span> WeatherPaper runs in your Windows system tray.</li>
-          </ul>
-
-          <div class="card-footer-action">
-            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip" class="btn btn-secondary" style="width: 100%;">
-              Direct Download (.zip / Setup)
             </a>
           </div>
         </div>
