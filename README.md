@@ -47,9 +47,11 @@ that gap.
 
 ## Download & Installation
 
+For full download links and step-by-step setup on Windows and Linux, read the **[Installation Guide (INSTALL.md)](INSTALL.md)**.
+
 ### Windows 10 & Windows 11
-- **Installer:** Download `WeatherPaper-Setup-v1.0.0.exe` from GitHub Releases. Run the installer and optionally check *"Start WeatherPaper when Windows starts"*.
-- **Portable:** Download `WeatherPaper-Windows-Portable.zip`, extract anywhere, and run `install-portable.bat` for startup registration.
+- **Installer:** Download `WeatherPaper-Setup-v1.0.0.exe` from [GitHub Releases](https://github.com/Anas-Gazi/WeatherPaper/releases). Run the installer and optionally check *"Start WeatherPaper when Windows starts"*.
+- **Portable:** Download `WeatherPaper-v1.0.0-windows-x64.zip`, extract anywhere, and run `install-portable.bat` for startup registration.
 
 ### Linux (Ubuntu, Debian, Pop!_OS, Mint)
 - **Debian Package (.deb):**
@@ -84,7 +86,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full build matrix
 
 | Document | For |
 |---|---|
-| [`USERGUIDE.md`](USERGUIDE.md) | End users — installing, configuring, adding your own wallpapers |
+| [`INSTALL.md`](INSTALL.md) | Download links, setup wizard, and manual installation guide |
+| [`USERGUIDE.md`](USERGUIDE.md) | End users — configuring, adding wallpapers, auto-start |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Contributors — module map, dependency rules, security posture, verification status |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contributors — build instructions, adding a Linux DE backend, adding a theme pack |
 | [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) | New contributors — "where do I find X", "how do I extend Y" quick-reference |
@@ -112,5 +115,4 @@ WeatherPaper/
 regardless.
 
 
-cd /home/anas/Downloads/WeatherPaper
 ./build/src/app/weatherpaperd 
