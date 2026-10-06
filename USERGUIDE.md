@@ -22,22 +22,34 @@ WeatherPaper is designed to be extremely lightweight, taking virtually **0% CPU*
    - Download `WeatherPaper-Windows-Portable.zip`.
    - Extract anywhere, and double-click `packaging/windows/install-portable.bat` to register autostart.
 
-### Linux (Ubuntu, Debian, Linux Mint, Pop!_OS)
+### Linux (All Distributions / Ubuntu / Debian / Fedora / Arch)
 
-1. **Debian Package (`.deb`):**
-   - Download `weatherpaper-0.1.0-Linux.deb` from the release assets.
+For direct download links, see the **[Installation Guide (INSTALL.md)](INSTALL.md)**.
+
+1. **⚡ One-Click Installer (`weatherpaper-installer.run`) — Easiest:**
+   - Download [`weatherpaper-installer.run`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run).
+   - In your file manager, right-click → **Properties** → **Permissions** → check **"Allow executing file as program"**, then double-click.
+   - Or run from terminal:
+     ```bash
+     chmod +x ~/Downloads/weatherpaper-installer.run
+     ~/Downloads/weatherpaper-installer.run
+     ```
+   - Automatically installs the program, default themes, desktop launcher, and autostart on login (no `sudo` required).
+
+2. **Debian Package (`.deb`):**
+   - Download [`weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb).
    - Install via terminal:
      ```bash
      sudo dpkg -i weatherpaper-0.1.0-Linux.deb
      sudo apt-get install -f   # ensures any missing runtime libs are installed
      ```
    - Or right-click the `.deb` file in your file manager and select **Open With Software Install**.
-2. **Universal Linux Installer (No root / Any Distro):**
-   - If using Arch, Fedora, openSUSE, or installing without `sudo`:
+
+3. **Universal Linux Installer (Source / Non-root):**
+   - If using Arch, Fedora, openSUSE, or installing from repository:
      ```bash
      ./packaging/linux/install.sh
      ```
-   - This installs WeatherPaper into `~/.local/bin`, adds desktop shortcuts, sets up icons, and configures login autostart.
 
 ---
 
@@ -90,18 +102,17 @@ its images and its tags, but never anything from your own Gallery.
 
 ### Gallery
 
-Your own wallpapers. Two ways to add one:
+Your own wallpapers. You can add images and videos in two easy ways:
 
-1. **Drag and drop** an image or video file straight onto the list.
-2. Click **Add File...** and pick one from a file browser.
+1. **Drag and drop:** Drag image or video files directly from your file manager (GNOME Files/Nautilus, Dolphin, Explorer) anywhere onto the Gallery page or the designated Drop Zone.
+2. **Add File button:** Click **Add File...** to select files from a file browser.
 
-Accepted formats: **PNG, JPG, WebP** for images; **MP4, WebM** for video.
-Anything else (including executables) is rejected — this is a safety
-feature, not a bug.
+- **Supported formats:** **PNG, JPG, JPEG, WebP** for static wallpapers; **MP4, WebM** for video wallpapers.
+- **Smart Automatic Tagging:** When you drop or add a file, WeatherPaper automatically inspects the filename for keywords (e.g. `night`, `rain`, `clear`, `sun`, `snow`, `fog`, `cloud`) and pre-selects the appropriate tags for you!
 
-After adding a file, tag it with the weather conditions and times of day
-it fits (e.g. "rain" + "night"), and choose how it should be sized on
-screen:
+#### Tagging and Sizing
+
+After adding a file, select it in the gallery list to edit its weather conditions, solar times of day (e.g. "rain" + "night"), and fit mode:
 
 | Fit mode | What it does |
 |---|---|
@@ -111,13 +122,14 @@ screen:
 | **Center** | Shows the image at its original size, centered, with no resizing at all. |
 | **Tile** | Repeats the image at its original size to cover the screen — useful for small pattern images. |
 
-If you add a very large image (over 4K resolution) or video (over 100MB),
-you'll get a warning about potential performance impact — you can still
-add it if you want to.
+#### ⚡ Instant Wallpaper Refresh (No Restart Required!)
+Whenever you:
+- Check or uncheck a condition or time-of-day tag
+- Change the fit mode (e.g. Stretch, Fill, Fit)
+- Delete or add a wallpaper
+- Or click the **"🔄 Refresh Wallpaper"** button in the gallery toolbar
 
-A wallpaper can have more than one tag (e.g. both "rainy" and "evening"),
-and more than one wallpaper can share the same tags — WeatherPaper will
-rotate between them.
+WeatherPaper immediately updates your desktop background in less than **1 second** — you never need to close and restart the application!
 
 ### Performance
 
