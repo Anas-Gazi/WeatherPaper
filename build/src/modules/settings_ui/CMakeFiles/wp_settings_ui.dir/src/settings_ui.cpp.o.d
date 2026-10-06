@@ -604,6 +604,8 @@ src/modules/settings_ui/CMakeFiles/wp_settings_ui.dir/src/settings_ui.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstackedwidget.h \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/QStyleFactory \
  /usr/include/x86_64-linux-gnu/qt6/QtWidgets/qstylefactory.h \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/QRegularExpression \
+ /usr/include/x86_64-linux-gnu/qt6/QtCore/qregularexpression.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QTimer \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/qtimer.h \
  /usr/include/x86_64-linux-gnu/qt6/QtCore/QUrl \
