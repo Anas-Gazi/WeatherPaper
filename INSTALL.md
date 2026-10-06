@@ -12,18 +12,35 @@ All releases and installer binaries are published on GitHub Releases:
 
 ### Direct Download Links (v0.1.0)
 
-| Platform | Package Type | Direct Download Link |
-| :--- | :--- | :--- |
-| **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb) |
-| **Linux (Any Distro - Standalone)** | `.tar.gz` Portable | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz) |
-| **Windows 10 & 11** | `.exe` Setup / `.zip` | Available on [Release Page](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0) or built with `packaging/windows/build-windows.bat` |
-
+| Platform | Package Type | Direct Download Link | Description |
+| :--- | :--- | :--- | :--- |
+| **Linux (All Distros)** | **⚡ One-Click Installer** | [**Download `weatherpaper-installer.run`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run) | **Single clickable file.** Installs all files, shortcuts, icons, and autostart automatically! |
+| **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb) | Standard Debian package for `dpkg`/`apt`. |
+| **Linux (Any Distro - Standalone)** | `.tar.gz` Archive | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz) | Portable tarball archive. |
+| **Windows 10 & 11** | `.exe` Setup / `.zip` | Available on [Release Page](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0) | Standard setup wizard / portable package. |
 
 ---
 
 ## 🐧 Linux Installation
 
-### Method A: Terminal Installation (`.deb`) — Recommended
+### Method A: ⚡ One-Click Installer (`weatherpaper-installer.run`) — Easiest
+
+1. **Download:** [**`weatherpaper-installer.run`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run)
+2. **Run it:**
+   - Either **Right-click** → **Properties** → **Permissions** → check **"Allow executing file as program"**, then **Double-Click** it.
+   - Or run in terminal:
+     ```bash
+     chmod +x ~/Downloads/weatherpaper-installer.run
+     ~/Downloads/weatherpaper-installer.run
+     ```
+3. **Done!** The installer automatically:
+   - Extracts and installs the program and all required assets and themes.
+   - Creates the application shortcut in your desktop app launcher with the WeatherPaper logo.
+   - Configures automatic startup when your PC boots or logs in.
+   - Launches WeatherPaper in the background immediately with a success notification!
+
+### Method B: Debian Package (`.deb`)
+
 
 1. Open a terminal and navigate to the directory where you downloaded the `.deb` file:
    ```bash
