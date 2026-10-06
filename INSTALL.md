@@ -8,16 +8,16 @@ This guide contains the official download links and step-by-step instructions fo
 
 All releases and installer binaries are published on GitHub Releases:
 
-👉 **Releases Page:** [https://github.com/Anas-Gazi/WeatherPaper/releases](https://github.com/Anas-Gazi/WeatherPaper/releases)
+👉 **Releases Page:** [https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0)
 
-### Direct Download Links (Latest Version)
+### Direct Download Links (v0.1.0)
 
 | Platform | Package Type | Direct Download Link |
 | :--- | :--- | :--- |
-| **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/weatherpaper-0.1.0-Linux.deb) |
-| **Linux (Any Distro - Standalone)** | `.tar.gz` Portable | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/weatherpaper-0.1.0-Linux.tar.gz) |
-| **Windows 10 & 11** | `.exe` Setup Installer | [Download `WeatherPaper-Setup-v1.0.0.exe`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/WeatherPaper-Setup-v1.0.0.exe) |
-| **Windows 10 & 11 (Portable)** | `.zip` Archive | [Download `WeatherPaper-v1.0.0-windows-x64.zip`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/WeatherPaper-v1.0.0-windows-x64.zip) |
+| **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb) |
+| **Linux (Any Distro - Standalone)** | `.tar.gz` Portable | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz) |
+| **Windows 10 & 11** | `.exe` Setup / `.zip` | Available on [Release Page](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0) or built with `packaging/windows/build-windows.bat` |
+
 
 ---
 
