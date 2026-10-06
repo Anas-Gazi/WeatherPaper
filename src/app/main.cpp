@@ -119,6 +119,12 @@ std::string find_app_icon_path(const std::string& assets_dir) {
 std::mutex g_shutdown_mutex;
 std::condition_variable g_shutdown_cv;
 volatile std::sig_atomic_t g_shutdown_requested = 0;
+std::atomic<bool> g_refresh_requested{false};
+
+void trigger_refresh() {
+    g_refresh_requested = true;
+    g_shutdown_cv.notify_all();
+}
 
 void handle_signal(int) {
     g_shutdown_requested = 1;
@@ -341,12 +347,16 @@ int main(int argc, char** argv) {
             auto interval = wp::weather_fetch::next_backoff_interval(
                 cfg.weather_poll_interval, consecutive_failures);
             auto deadline = std::chrono::steady_clock::now() + interval;
-            while (std::chrono::steady_clock::now() < deadline && !g_shutdown_requested) {
+            while (std::chrono::steady_clock::now() < deadline && !g_shutdown_requested && !g_refresh_requested) {
                 std::unique_lock<std::mutex> lock(g_shutdown_mutex);
-                g_shutdown_cv.wait_for(lock, std::chrono::seconds(1));
+                g_shutdown_cv.wait_for(lock, std::chrono::milliseconds(500));
                 if (hooks) hooks->pump_events();
             }
             if (g_shutdown_requested) break;
+            if (g_refresh_requested) {
+                std::cout << "[weatherpaper] executing immediate condition/tag refresh...\n";
+                g_refresh_requested = false;
+            }
             run_pipeline_once(cfg, tag_index, http_client, *wallpaper_platform, *notifier,
                               paths.weather_cache_file, consecutive_failures, crossfade);
         }
@@ -377,7 +387,7 @@ int main(int argc, char** argv) {
     // Wire manual refresh trigger from Settings UI
     settings_window.set_force_refresh_callback([&]() {
         std::cout << "[weatherpaper] manual refresh requested from UI\n";
-        g_shutdown_cv.notify_all();
+        trigger_refresh();
     });
 
     settings_window.show();
@@ -390,10 +400,11 @@ int main(int argc, char** argv) {
     tray_callbacks.on_toggle_pause_resume = [&]() {
         is_paused = !is_paused;
         if (tray_icon) tray_icon->set_paused_label(is_paused);
-        if (!is_paused) g_shutdown_cv.notify_all();
+        if (!is_paused) trigger_refresh();
     };
     tray_callbacks.on_force_refresh_now = [&]() {
-        g_shutdown_cv.notify_all();
+        std::cout << "[weatherpaper] manual refresh requested from tray\n";
+        trigger_refresh();
     };
     tray_callbacks.on_open_settings = [&]() {
         settings_window.show();

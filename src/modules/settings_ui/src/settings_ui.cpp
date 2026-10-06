@@ -26,6 +26,7 @@
 #include <QSpinBox>
 #include <QStackedWidget>
 #include <QStyleFactory>
+#include <QRegularExpression>
 #include <QTimer>
 #include <QUrl>
 #include <QVBoxLayout>
@@ -302,11 +303,39 @@ QScrollBar:horizontal {
 }
 )";
 
+static QStringList extract_file_paths(const QMimeData* mime) {
+    QStringList paths;
+    if (!mime) return paths;
+    if (mime->hasUrls()) {
+        for (const QUrl& url : mime->urls()) {
+            if (url.isLocalFile()) {
+                paths << url.toLocalFile();
+            } else if (url.scheme() == "file") {
+                paths << url.path();
+            }
+        }
+    }
+    if (paths.isEmpty() && mime->hasText()) {
+        const auto lines = mime->text().split(QRegularExpression("[\r\n]+"));
+        for (const auto& line : lines) {
+            QString trimmed = line.trimmed();
+            if (trimmed.startsWith("file://")) {
+                trimmed = QUrl(trimmed).toLocalFile();
+            }
+            if (!trimmed.isEmpty() && QFile::exists(trimmed)) {
+                paths << trimmed;
+            }
+        }
+    }
+    return paths;
+}
+
 class GalleryListWidget : public QListWidget {
     Q_OBJECT
 public:
     explicit GalleryListWidget(QWidget* parent = nullptr) : QListWidget(parent) {
         setAcceptDrops(true);
+        if (viewport()) viewport()->setAcceptDrops(true);
         setDragDropMode(QAbstractItemView::DropOnly);
         setSelectionMode(QAbstractItemView::SingleSelection);
         setObjectName("contentList");
@@ -317,25 +346,78 @@ signals:
 
 protected:
     void dragEnterEvent(QDragEnterEvent* event) override {
-        if (event->mimeData()->hasUrls()) event->acceptProposedAction();
-        else event->ignore();
+        if (event->mimeData()->hasUrls() || event->mimeData()->hasText()) {
+            event->setDropAction(Qt::CopyAction);
+            event->acceptProposedAction();
+            event->accept();
+        } else {
+            event->ignore();
+        }
     }
     void dragMoveEvent(QDragMoveEvent* event) override {
-        if (event->mimeData()->hasUrls()) event->acceptProposedAction();
-        else event->ignore();
+        if (event->mimeData()->hasUrls() || event->mimeData()->hasText()) {
+            event->setDropAction(Qt::CopyAction);
+            event->acceptProposedAction();
+            event->accept();
+        } else {
+            event->ignore();
+        }
     }
     void dropEvent(QDropEvent* event) override {
-        QStringList paths;
-        for (const QUrl& url : event->mimeData()->urls()) {
-            if (url.isLocalFile()) paths << url.toLocalFile();
-        }
+        QStringList paths = extract_file_paths(event->mimeData());
         if (!paths.isEmpty()) emit filesDropped(paths);
+        event->setDropAction(Qt::CopyAction);
         event->acceptProposedAction();
+        event->accept();
     }
 };
 
-// Event filter that forwards drag-and-drop events from the drop-zone banner
-// to the GalleryListWidget so users can drop files on either widget.
+class DropZoneWidget : public QFrame {
+    Q_OBJECT
+public:
+    explicit DropZoneWidget(QWidget* parent = nullptr) : QFrame(parent) {
+        setAcceptDrops(true);
+    }
+
+signals:
+    void filesDropped(const QStringList& paths);
+
+protected:
+    void dragEnterEvent(QDragEnterEvent* event) override {
+        if (event->mimeData()->hasUrls() || event->mimeData()->hasText()) {
+            event->setDropAction(Qt::CopyAction);
+            event->acceptProposedAction();
+            event->accept();
+            setStyleSheet("#dropZone { border: 2px dashed #38BDF8; background-color: rgba(56, 189, 248, 0.12); }");
+        } else {
+            event->ignore();
+        }
+    }
+    void dragMoveEvent(QDragMoveEvent* event) override {
+        if (event->mimeData()->hasUrls() || event->mimeData()->hasText()) {
+            event->setDropAction(Qt::CopyAction);
+            event->acceptProposedAction();
+            event->accept();
+        } else {
+            event->ignore();
+        }
+    }
+    void dragLeaveEvent(QDragLeaveEvent* event) override {
+        setStyleSheet("");
+        event->accept();
+    }
+    void dropEvent(QDropEvent* event) override {
+        setStyleSheet("");
+        QStringList paths = extract_file_paths(event->mimeData());
+        if (!paths.isEmpty()) emit filesDropped(paths);
+        event->setDropAction(Qt::CopyAction);
+        event->acceptProposedAction();
+        event->accept();
+    }
+};
+
+// Event filter that forwards drag-and-drop events from any container widget
+// to the GalleryListWidget so users can drop files anywhere on the page.
 class DropForwarder : public QObject {
     Q_OBJECT
 public:
@@ -346,20 +428,28 @@ protected:
     bool eventFilter(QObject* /*watched*/, QEvent* event) override {
         if (event->type() == QEvent::DragEnter) {
             auto* de = static_cast<QDragEnterEvent*>(event);
-            if (de->mimeData()->hasUrls()) { de->acceptProposedAction(); return true; }
-        } else if (event->type() == QEvent::DragMove) {
-            auto* dm = static_cast<QDragMoveEvent*>(event);
-            if (dm->mimeData()->hasUrls()) { dm->acceptProposedAction(); return true; }
-        } else if (event->type() == QEvent::Drop) {
-            auto* drop = static_cast<QDropEvent*>(event);
-            if (drop->mimeData()->hasUrls()) {
-                QStringList paths;
-                for (const QUrl& url : drop->mimeData()->urls())
-                    if (url.isLocalFile()) paths << url.toLocalFile();
-                if (!paths.isEmpty()) emit target_->filesDropped(paths);
-                drop->acceptProposedAction();
+            if (de->mimeData()->hasUrls() || de->mimeData()->hasText()) {
+                de->setDropAction(Qt::CopyAction);
+                de->acceptProposedAction();
+                de->accept();
                 return true;
             }
+        } else if (event->type() == QEvent::DragMove) {
+            auto* dm = static_cast<QDragMoveEvent*>(event);
+            if (dm->mimeData()->hasUrls() || dm->mimeData()->hasText()) {
+                dm->setDropAction(Qt::CopyAction);
+                dm->acceptProposedAction();
+                dm->accept();
+                return true;
+            }
+        } else if (event->type() == QEvent::Drop) {
+            auto* drop = static_cast<QDropEvent*>(event);
+            QStringList paths = extract_file_paths(drop->mimeData());
+            if (!paths.isEmpty()) emit target_->filesDropped(paths);
+            drop->setDropAction(Qt::CopyAction);
+            drop->acceptProposedAction();
+            drop->accept();
+            return true;
         }
         return false;
     }
@@ -860,7 +950,7 @@ QWidget* MainWindow::build_gallery_tab() {
     layout->setSpacing(12);
 
     // Dropzone Banner
-    auto* drop_card = new QFrame(page);
+    auto* drop_card = new DropZoneWidget(page);
     drop_card->setObjectName("dropZone");
     auto* drop_layout = new QVBoxLayout(drop_card);
     drop_layout->setContentsMargins(14, 12, 14, 12);
@@ -869,10 +959,14 @@ QWidget* MainWindow::build_gallery_tab() {
     auto* drop_title = new QLabel("📥  Drag & Drop Wallpapers Here", drop_card);
     drop_title->setStyleSheet("font-weight: 600; font-size: 14px; color: #F1F5F9;");
     drop_title->setAlignment(Qt::AlignCenter);
+    drop_title->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+
     auto* drop_subtitle = new QLabel("Accepts PNG, JPG, WebP images and MP4/WebM video loops", drop_card);
     drop_subtitle->setObjectName("sectionDesc");
     drop_subtitle->setWordWrap(true);
     drop_subtitle->setAlignment(Qt::AlignCenter);
+    drop_subtitle->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+
     drop_layout->addWidget(drop_title);
     drop_layout->addWidget(drop_subtitle);
     layout->addWidget(drop_card);
@@ -892,6 +986,22 @@ QWidget* MainWindow::build_gallery_tab() {
     list_header->addWidget(list_title);
     list_header->addStretch();
 
+    auto* refresh_btn = new QPushButton("🔄 Refresh Wallpaper", list_card);
+    refresh_btn->setObjectName("secondaryBtn");
+    refresh_btn->setToolTip("Immediately update desktop wallpaper for current weather and solar time");
+    connect(refresh_btn, &QPushButton::clicked, this, [this]() {
+        if (impl_->on_force_refresh) {
+            impl_->on_force_refresh();
+            if (impl_->save_status_label) {
+                impl_->save_status_label->setText("✓ Refreshed desktop wallpaper for current weather!");
+                QTimer::singleShot(3500, impl_->save_status_label, [this]() {
+                    if (impl_->save_status_label) impl_->save_status_label->clear();
+                });
+            }
+        }
+    });
+    list_header->addWidget(refresh_btn);
+
     auto* add_file_btn = new QPushButton("+ Add Wallpaper...", list_card);
     add_file_btn->setObjectName("primaryBtn");
     connect(add_file_btn, &QPushButton::clicked, this, &MainWindow::on_add_gallery_file_clicked);
@@ -902,43 +1012,69 @@ QWidget* MainWindow::build_gallery_tab() {
     impl_->gallery_list->setMinimumHeight(320);
     list_card_layout->addWidget(impl_->gallery_list);
 
-    connect(impl_->gallery_list, &GalleryListWidget::filesDropped, this,
-            [this](const QStringList& paths) {
-                for (const auto& p : paths) {
-                    auto validation = asset_manager::validate_upload(p.toStdString(), 0);
-                    if (!validation.accepted) {
-                        QMessageBox::warning(this, "Unsupported File", QString::fromStdString(validation.rejection_reason));
-                        continue;
-                    }
-                    tag_system::AssetRecord rec;
-                    std::string base_id = QFileInfo(p).baseName().toStdString();
-                    std::string id = base_id;
-                    int suffix = 1;
-                    while (tag_index_ != nullptr && tag_index_->get(id).has_value()) {
-                        id = base_id + "_" + std::to_string(suffix++);
-                    }
-                    rec.id = id;
-                    rec.file_path = p.toStdString();
-                    rec.type = validation.type == asset_manager::UploadFileType::Video
-                                   ? tag_system::AssetType::Video
-                                   : tag_system::AssetType::Image;
-                    rec.tags = {"day", "clear"};
-                    if (tag_index_ != nullptr) {
-                        tag_index_->upsert(rec);
-                        std::filesystem::create_directories(config::default_data_dir());
-                        (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
-                    }
-                }
-                refresh_gallery_list();
-            });
+    auto handle_dropped_paths = [this](const QStringList& paths) {
+        for (const auto& p : paths) {
+            auto validation = asset_manager::validate_upload(p.toStdString(), 0);
+            if (!validation.accepted) {
+                QMessageBox::warning(this, "Unsupported File", QString::fromStdString(validation.rejection_reason));
+                continue;
+            }
+            if (validation.exceeds_warning_threshold) {
+                auto choice = QMessageBox::warning(
+                    this, "Large File",
+                    "This file is larger or higher-resolution than recommended and may affect performance. Add it anyway?",
+                    QMessageBox::Yes | QMessageBox::No);
+                if (choice != QMessageBox::Yes) continue;
+            }
+            tag_system::AssetRecord rec;
+            std::string base_id = QFileInfo(p).baseName().toStdString();
+            std::string id = base_id;
+            int suffix = 1;
+            while (tag_index_ != nullptr && tag_index_->get(id).has_value()) {
+                id = base_id + "_" + std::to_string(suffix++);
+            }
+            rec.id = id;
+            rec.file_path = p.toStdString();
+            rec.type = validation.type == asset_manager::UploadFileType::Video
+                           ? tag_system::AssetType::Video
+                           : tag_system::AssetType::Image;
 
-    // Make the drop banner also accept drops by forwarding to gallery_list
-    drop_card->setAcceptDrops(true);
-    auto* drop_filter = new DropForwarder(impl_->gallery_list, drop_card);
-    drop_card->installEventFilter(drop_filter);
-    // Also install on its child labels so events bubble up correctly
-    drop_title->setAcceptDrops(false);
-    drop_subtitle->setAcceptDrops(false);
+            // Intelligent tag detection from filename:
+            std::string lower = p.toLower().toStdString();
+            if (lower.find("night") != std::string::npos) rec.tags.insert("night");
+            else if (lower.find("morning") != std::string::npos) rec.tags.insert("morning");
+            else if (lower.find("evening") != std::string::npos) rec.tags.insert("evening");
+            else rec.tags.insert("day");
+
+            if (lower.find("rain") != std::string::npos) rec.tags.insert("rain");
+            else if (lower.find("snow") != std::string::npos) rec.tags.insert("snow");
+            else if (lower.find("cloud") != std::string::npos) rec.tags.insert("cloudy");
+            else if (lower.find("storm") != std::string::npos) rec.tags.insert("storm");
+            else if (lower.find("fog") != std::string::npos) rec.tags.insert("fog");
+            else if (lower.find("sun") != std::string::npos) rec.tags.insert("sunny");
+            else rec.tags.insert("clear");
+
+            if (tag_index_ != nullptr) {
+                tag_index_->upsert(rec);
+                std::filesystem::create_directories(config::default_data_dir());
+                (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
+            }
+            impl_->current_selected_asset_id = rec.id;
+        }
+        refresh_gallery_list();
+        if (impl_->on_force_refresh) {
+            impl_->on_force_refresh();
+        }
+    };
+
+    connect(drop_card, &DropZoneWidget::filesDropped, this, handle_dropped_paths);
+    connect(impl_->gallery_list, &GalleryListWidget::filesDropped, this, handle_dropped_paths);
+
+    // Make the entire gallery page and scroll area forward drops to the list
+    page->setAcceptDrops(true);
+    page->installEventFilter(new DropForwarder(impl_->gallery_list, page));
+    scroll->setAcceptDrops(true);
+    scroll->installEventFilter(new DropForwarder(impl_->gallery_list, scroll));
 
     main_split->addWidget(list_card, /*stretch=*/3);
 
@@ -1025,6 +1161,7 @@ QWidget* MainWindow::build_gallery_tab() {
             std::filesystem::create_directories(config::default_data_dir());
             (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
             update_current_item_display();
+            if (impl_->on_force_refresh) impl_->on_force_refresh();
         }
     });
     fit_row->addWidget(impl_->inspector_fit_combo);
@@ -1050,6 +1187,7 @@ QWidget* MainWindow::build_gallery_tab() {
             std::filesystem::create_directories(config::default_data_dir());
             (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
             update_current_item_display();
+            if (impl_->on_force_refresh) impl_->on_force_refresh();
         });
         impl_->condition_tag_checks.push_back(cb);
         cond_grid->addWidget(cb, c_idx / 4, c_idx % 4);
@@ -1072,6 +1210,7 @@ QWidget* MainWindow::build_gallery_tab() {
             std::filesystem::create_directories(config::default_data_dir());
             (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
             update_current_item_display();
+            if (impl_->on_force_refresh) impl_->on_force_refresh();
         });
         impl_->solar_tag_checks.push_back(cb);
         solar_grid->addWidget(cb, 0, s_idx);
@@ -1104,6 +1243,7 @@ QWidget* MainWindow::build_gallery_tab() {
         std::filesystem::create_directories(config::default_data_dir());
         (void)tag_index_->save_to_file(config::default_data_dir() + "/tag_index.json");
         refresh_gallery_list();
+        if (impl_->on_force_refresh) impl_->on_force_refresh();
     });
     insp_layout->addWidget(impl_->inspector_delete_btn);
 
@@ -1396,7 +1536,20 @@ void MainWindow::on_add_gallery_file_clicked() {
     rec.type = validation.type == asset_manager::UploadFileType::Video
                    ? tag_system::AssetType::Video
                    : tag_system::AssetType::Image;
-    rec.tags = {"day", "clear"};
+    std::string lower = path.toLower().toStdString();
+    if (lower.find("night") != std::string::npos) rec.tags.insert("night");
+    else if (lower.find("morning") != std::string::npos) rec.tags.insert("morning");
+    else if (lower.find("evening") != std::string::npos) rec.tags.insert("evening");
+    else rec.tags.insert("day");
+
+    if (lower.find("rain") != std::string::npos) rec.tags.insert("rain");
+    else if (lower.find("snow") != std::string::npos) rec.tags.insert("snow");
+    else if (lower.find("cloud") != std::string::npos) rec.tags.insert("cloudy");
+    else if (lower.find("storm") != std::string::npos) rec.tags.insert("storm");
+    else if (lower.find("fog") != std::string::npos) rec.tags.insert("fog");
+    else if (lower.find("sun") != std::string::npos) rec.tags.insert("sunny");
+    else rec.tags.insert("clear");
+
     if (tag_index_ != nullptr) {
         tag_index_->upsert(rec);
         std::filesystem::create_directories(config::default_data_dir());
@@ -1404,6 +1557,9 @@ void MainWindow::on_add_gallery_file_clicked() {
     }
     impl_->current_selected_asset_id = rec.id;
     refresh_gallery_list();
+    if (impl_->on_force_refresh) {
+        impl_->on_force_refresh();
+    }
 }
 
 void MainWindow::on_save_settings_clicked() {
