@@ -50,8 +50,7 @@ that gap.
 For full download links and step-by-step setup on Windows and Linux, read the **[Installation Guide (INSTALL.md)](INSTALL.md)**.
 
 ### Windows 10 & Windows 11
-- **Installer:** Download `WeatherPaper-Setup-v1.0.0.exe` from [GitHub Releases](https://github.com/Anas-Gazi/WeatherPaper/releases). Run the installer and optionally check *"Start WeatherPaper when Windows starts"*.
-- **Portable:** Download `WeatherPaper-v1.0.0-windows-x64.zip`, extract anywhere, and run `install-portable.bat` for startup registration.
+- **⚡ One-Click Download:** Download [**`WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip), extract with 1 click, and double-click `install-portable.bat` to launch and autostart on Windows.
 
 ### Linux (All Distributions / Ubuntu / Debian / Fedora / Arch)
 - **⚡ One-Click Installer (`.run`):** Download [`weatherpaper-installer.run`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run), run it, and it automatically installs all files, desktop shortcuts, autostart, and launches WeatherPaper.

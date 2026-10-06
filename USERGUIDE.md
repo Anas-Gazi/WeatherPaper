@@ -12,15 +12,12 @@ WeatherPaper is designed to be extremely lightweight, taking virtually **0% CPU*
 
 ### Windows 10 & Windows 11
 
-1. **Download the Installer:**
-   - Download `WeatherPaper-Setup-v1.0.0.exe` from the latest GitHub Release (or compile using `packaging/windows/build-windows.bat`).
-2. **Install:**
-   - Double-click the installer and follow the setup wizard.
-   - You can choose to automatically start WeatherPaper when Windows boots.
-   - A shortcut will be placed in your Start Menu and system tray.
-3. **Portable Mode (Alternative):**
-   - Download `WeatherPaper-Windows-Portable.zip`.
-   - Extract anywhere, and double-click `packaging/windows/install-portable.bat` to register autostart.
+1. **⚡ One-Click Download:**
+   - Download [**`WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip).
+2. **Extract & Run:**
+   - Right-click the `.zip` file and click **Extract All...**.
+   - Double-click `install-portable.bat` to enable automatic weather-reactive wallpapers on startup.
+   - WeatherPaper immediately launches in your Windows system tray. Done!
 
 ### Linux (All Distributions / Ubuntu / Debian / Fedora / Arch)
 

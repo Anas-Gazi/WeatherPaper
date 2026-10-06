@@ -17,7 +17,7 @@ All releases and installer binaries are published on GitHub Releases:
 | **Linux (All Distros)** | **⚡ One-Click Installer** | [**Download `weatherpaper-installer.run`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run) | **Single clickable file.** Installs all files, shortcuts, icons, and autostart automatically! |
 | **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb) | Standard Debian package for `dpkg`/`apt`. |
 | **Linux (Any Distro - Standalone)** | `.tar.gz` Archive | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz) | Portable tarball archive. |
-| **Windows 10 & 11** | `.exe` Setup / `.zip` | Available on [Release Page](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0) | Standard setup wizard / portable package. |
+| **Windows 10 & 11** | **⚡ 1-Click Package** | [**Download `WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip) | **Zero-install.** 1-click download, extract, and run immediately on Windows! |
 
 ---
 
@@ -79,21 +79,17 @@ sudo apt remove weatherpaper
 
 ## 🪟 Windows 10 & 11 Installation
 
-### Method A: Standard Setup Wizard (`.exe`) — Recommended
+### Method A: ⚡ One-Click Windows Package — Easiest (No Installation Required)
 
-1. Download [`WeatherPaper-Setup-v1.0.0.exe`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/WeatherPaper-Setup-v1.0.0.exe).
-2. Double-click the downloaded setup file.
-   > **Note:** If Windows SmartScreen displays *"Windows protected your PC"*, click **More info** and then click **Run anyway**.
-3. Choose your desired install location (default is `C:\Program Files\WeatherPaper`).
-4. Keep the checkbox **"Start WeatherPaper when Windows starts"** checked to ensure your dynamic wallpaper updates automatically upon login.
-5. Click **Install**, then click **Finish**. WeatherPaper will launch and minimize to your system tray.
+1. **Download:** [**`WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip)
+2. **Extract:** Right-click the downloaded `.zip` file and select **Extract All...** (or double-click to open).
+3. **Run & Autostart:** Double-click `install-portable.bat` inside the extracted folder.
+   - WeatherPaper immediately launches in your Windows system tray.
+   - Dynamic wallpapers will now update automatically in real-time and start when your PC boots!
 
-### Method B: Portable ZIP Package (`.zip`)
+### Method B: Standard Setup Wizard (.exe)
+- If you prefer a setup wizard installer, download `WeatherPaper-Setup.exe` from the [Releases Page](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0) and follow the on-screen steps.
 
-1. Download [`WeatherPaper-v1.0.0-windows-x64.zip`](https://github.com/Anas-Gazi/WeatherPaper/releases/latest/download/WeatherPaper-v1.0.0-windows-x64.zip).
-2. Right-click the `.zip` archive and select **Extract All...**.
-3. Open the extracted folder and double-click `weatherpaperd.exe` to run WeatherPaper directly without installing.
-4. *(Optional)* To enable autostart on Windows startup in portable mode, double-click `install-portable.bat`.
 
 ### Uninstalling from Windows
 

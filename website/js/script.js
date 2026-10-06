@@ -60,16 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const winBtn = document.querySelector('.os-toggle-btn[data-os="windows"]');
     if (winBtn) winBtn.click();
     if (heroDownloadBtn) {
-      heroDownloadBtn.href = 'https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0';
+      heroDownloadBtn.href = 'https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip';
       heroDownloadBtn.innerHTML = `
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/>
         </svg>
-        Download for Windows
+        Download for Windows (One-Click)
       `;
     }
     if (heroDownloadMeta) {
-      heroDownloadMeta.textContent = 'v0.1.0 • Windows 10 & 11 • Portable & Setup';
+      heroDownloadMeta.textContent = 'v0.1.0 • Windows 10 & 11 (64-bit) • 1-Click Download';
     }
   } else {
     // Visitor is on Linux / Default

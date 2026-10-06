@@ -270,39 +270,42 @@
 
       <!-- Windows Install Cards Panel -->
       <div class="install-cards-grid" id="windows-install-panel" style="display: none;">
-        <!-- 1. Windows Setup Wizard -->
+        <!-- 1. Windows One-Click Download -->
         <div class="install-card recommended">
-          <span class="card-badge">Recommended</span>
-          <h3 class="install-card-title">🪟 Windows Setup Installer</h3>
-          <p class="install-card-desc">Standard Windows setup wizard with Start Menu shortcuts and optional autostart on Windows startup.</p>
+          <span class="card-badge">1-Click Download</span>
+          <h3 class="install-card-title">⚡ One-Click Windows Package</h3>
+          <p class="install-card-desc">Zero install hassle. Download with 1 click, extract, and WeatherPaper starts running immediately on Windows 10 or 11.</p>
 
           <ul class="install-steps">
-            <li><span class="step-number">1</span> Download <code>WeatherPaper-Setup-v1.0.0.exe</code>.</li>
-            <li><span class="step-number">2</span> Double-click and follow the guided setup wizard.</li>
-            <li><span class="step-number">3</span> Keep "Start with Windows" checked for dynamic wallpapers on boot.</li>
+            <li><span class="step-number">1</span> Click the <strong>Download</strong> button below.</li>
+            <li><span class="step-number">2</span> Right-click the downloaded <code>.zip</code> file and click <strong>Extract All...</strong></li>
+            <li><span class="step-number">3</span> Double-click <code>install-portable.bat</code> to enable dynamic wallpapers on Windows startup. Done!</li>
           </ul>
 
           <div class="card-footer-action">
-            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0" class="btn btn-accent" style="width: 100%;">
-              Get Windows Setup (GitHub Releases)
+            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip" class="btn btn-accent" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.802"/>
+              </svg>
+              Download for Windows (One-Click)
             </a>
           </div>
         </div>
 
-        <!-- 2. Windows Portable ZIP -->
+        <!-- 2. Windows Setup Information -->
         <div class="install-card">
-          <h3 class="install-card-title">📁 Portable ZIP Package</h3>
-          <p class="install-card-desc">No installation required. Unpack anywhere, run directly, or carry on a USB drive.</p>
+          <h3 class="install-card-title">🪟 Windows Setup Installer (.exe)</h3>
+          <p class="install-card-desc">Standard Windows Setup executable with desktop shortcut and Add/Remove Programs integration.</p>
 
           <ul class="install-steps">
-            <li><span class="step-number">1</span> Download <code>WeatherPaper-v1.0.0-windows-x64.zip</code>.</li>
-            <li><span class="step-number">2</span> Right-click → Extract All.</li>
-            <li><span class="step-number">3</span> Run <code>weatherpaperd.exe</code> directly.</li>
+            <li><span class="step-number">1</span> Download the Windows installer package.</li>
+            <li><span class="step-number">2</span> Run the guided installer wizard.</li>
+            <li><span class="step-number">3</span> WeatherPaper runs in your Windows system tray.</li>
           </ul>
 
           <div class="card-footer-action">
-            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0" class="btn btn-secondary" style="width: 100%;">
-              Get Windows Portable ZIP
+            <a href="https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip" class="btn btn-secondary" style="width: 100%;">
+              Direct Download (.zip / Setup)
             </a>
           </div>
         </div>
