@@ -1,1 +1,1 @@
-/usr/bin/c++ -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_time_of_day.dir/link.d CMakeFiles/test_time_of_day.dir/test_time_of_day.cpp.o -o test_time_of_day  ../../src/modules/time_of_day/libweatherpaper_time_of_day.a
+/usr/bin/c++ -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_time_of_day.dir/link.d CMakeFiles/test_time_of_day.dir/test_time_of_day.cpp.o -o test_time_of_day  ../../src/modules/time_of_day/libweatherpaper_time_of_day.a

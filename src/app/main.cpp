@@ -40,6 +40,15 @@
 #include "weatherpaper/wallpaper_engine_core/wallpaper_engine_core.hpp"
 #include "weatherpaper/weather_fetch/weather_fetch.hpp"
 
+#include <cstdlib>
+#include <filesystem>
+#ifdef _WIN32
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#include <windows.h>
+#endif
+
 #ifndef WEATHERPAPER_BUNDLED_ASSETS_DIR
 #define WEATHERPAPER_BUNDLED_ASSETS_DIR "./assets/default_theme"
 #endif
@@ -47,6 +56,65 @@
 namespace wp = weatherpaper;
 
 namespace {
+
+std::filesystem::path get_executable_dir() {
+#ifdef _WIN32
+    wchar_t buffer[MAX_PATH];
+    if (GetModuleFileNameW(NULL, buffer, MAX_PATH) > 0) {
+        return std::filesystem::path(buffer).parent_path();
+    }
+    return std::filesystem::current_path();
+#else
+    try {
+        return std::filesystem::canonical("/proc/self/exe").parent_path();
+    } catch (...) {
+        return std::filesystem::current_path();
+    }
+#endif
+}
+
+std::string find_bundled_assets_dir() {
+    if (const char* env = std::getenv("WEATHERPAPER_ASSETS_DIR")) {
+        std::error_code ec;
+        if (std::filesystem::is_directory(env, ec)) return env;
+    }
+    const auto exe_dir = get_executable_dir();
+    const std::filesystem::path candidates[] = {
+        exe_dir / "../share/weatherpaper/default_theme",
+        exe_dir / "share/weatherpaper/default_theme",
+        exe_dir / "assets/default_theme",
+        std::filesystem::current_path() / "assets/default_theme",
+        std::filesystem::path(WEATHERPAPER_BUNDLED_ASSETS_DIR)
+    };
+    for (const auto& c : candidates) {
+        std::error_code ec;
+        if (std::filesystem::exists(c / "tags.json", ec)) {
+            auto can = std::filesystem::canonical(c, ec);
+            return ec ? c.string() : can.string();
+        }
+    }
+    return WEATHERPAPER_BUNDLED_ASSETS_DIR;
+}
+
+std::string find_app_icon_path(const std::string& assets_dir) {
+    const auto exe_dir = get_executable_dir();
+    const std::filesystem::path candidates[] = {
+        std::filesystem::path(assets_dir) / "../../icons/weatherpaper-icon-32.png",
+        exe_dir / "../share/icons/hicolor/32x32/apps/weatherpaper-icon-32.png",
+        exe_dir / "../share/weatherpaper/icons/weatherpaper-icon-32.png",
+        exe_dir / "share/weatherpaper/icons/weatherpaper-icon-32.png",
+        exe_dir / "assets/icons/weatherpaper-icon-32.png",
+        std::filesystem::current_path() / "assets/icons/weatherpaper-icon-32.png"
+    };
+    for (const auto& c : candidates) {
+        std::error_code ec;
+        if (std::filesystem::exists(c, ec)) {
+            auto can = std::filesystem::canonical(c, ec);
+            return ec ? c.string() : can.string();
+        }
+    }
+    return std::string(assets_dir) + "/../../icons/weatherpaper-icon-32.png";
+}
 
 std::mutex g_shutdown_mutex;
 std::condition_variable g_shutdown_cv;
@@ -61,7 +129,9 @@ struct AppPaths {
     std::string config_file;
     std::string tag_index_file;
     std::string weather_cache_file;
+    std::string bundled_assets_dir;
     std::string bundled_tags_file;
+    std::string app_icon_file;
 };
 
 AppPaths resolve_paths() {
@@ -69,7 +139,9 @@ AppPaths resolve_paths() {
     paths.config_file = wp::config::default_config_dir() + "/config.json";
     paths.tag_index_file = wp::config::default_data_dir() + "/tag_index.json";
     paths.weather_cache_file = wp::config::default_cache_dir() + "/weather_cache.json";
-    paths.bundled_tags_file = std::string(WEATHERPAPER_BUNDLED_ASSETS_DIR) + "/tags.json";
+    paths.bundled_assets_dir = find_bundled_assets_dir();
+    paths.bundled_tags_file = paths.bundled_assets_dir + "/tags.json";
+    paths.app_icon_file = find_app_icon_path(paths.bundled_assets_dir);
     return paths;
 }
 
@@ -184,7 +256,7 @@ int main(int argc, char** argv) {
     auto bundled = wp::tag_system::TagIndex::load_from_file(paths.bundled_tags_file, &bundled_ok);
     for (const auto& rec : bundled.list_all()) {
         auto copy = rec;
-        copy.file_path = std::string(WEATHERPAPER_BUNDLED_ASSETS_DIR) + "/" + rec.file_path;
+        copy.file_path = paths.bundled_assets_dir + "/" + rec.file_path;
         copy.source_pack_id = "bundled-default";
         tag_index.upsert(copy);
     }
@@ -285,8 +357,7 @@ int main(int argc, char** argv) {
     QApplication qt_app(argc, argv);
     qt_app.setApplicationName("WeatherPaper");
     qt_app.setApplicationVersion("1.0.0");
-    qt_app.setWindowIcon(QIcon(QString::fromStdString(
-        std::string(WEATHERPAPER_BUNDLED_ASSETS_DIR) + "/../../icons/weatherpaper-icon-32.png")));
+    qt_app.setWindowIcon(QIcon(QString::fromStdString(paths.app_icon_file)));
 
     wp::settings_ui::MainWindow settings_window(&cfg, &tag_index, &pack_manager);
 
@@ -341,8 +412,7 @@ int main(int argc, char** argv) {
         QApplication::quit();
     };
 
-    const std::string tray_icon_path =
-        std::string(WEATHERPAPER_BUNDLED_ASSETS_DIR) + "/../../icons/weatherpaper-icon-32.png";
+    const std::string tray_icon_path = paths.app_icon_file;
     bool tray_ok = false;
     if (tray_icon && tray_icon->create(tray_callbacks, tray_icon_path)) {
         tray_ok = true;

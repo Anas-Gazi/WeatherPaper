@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WeatherPaper
+GenericName=Live Weather Wallpaper Daemon
+Comment=Starts WeatherPaper in background on login to keep wallpaper synced with weather
+Exec=weatherpaperd
+Icon=weatherpaper
+Terminal=false
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+X-KDE-autostart-after=panel
+StartupNotify=false
+Categories=Utility;

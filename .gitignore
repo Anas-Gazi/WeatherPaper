@@ -1,0 +1,34 @@
+# Build directories and outputs
+build/
+build-*/
+dist/
+bin/
+
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CPackConfig.cmake
+CPackSourceConfig.cmake
+compile_commands.json
+Testing/
+
+# Package outputs
+*.deb
+*.tar.gz
+*.zip
+*.exe
+
+# User cache & runtime data
+*.log
+.cache/
+weather_cache.json
+config.json
+tag_index.json
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.user

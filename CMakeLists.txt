@@ -102,3 +102,90 @@ if(WEATHERPAPER_BUILD_TESTS)
     enable_testing()
     add_subdirectory(tests)
 endif()
+
+# ---------------------------------------------------------------------------
+# Installation and Packaging (CPack)
+# ---------------------------------------------------------------------------
+include(GNUInstallDirs)
+
+# Install bundled default theme assets
+install(DIRECTORY assets/default_theme/
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/weatherpaper/default_theme
+    FILES_MATCHING
+    PATTERN "*.json"
+    PATTERN "*.jpg"
+    PATTERN "*.png"
+    PATTERN "*.webp"
+    PATTERN "*.mp4"
+    PATTERN "*.webm"
+    PATTERN "README.md"
+)
+
+# Install icons in standard XDG hicolor locations
+install(FILES assets/icons/weatherpaper-icon-16.png
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/16x16/apps
+    RENAME weatherpaper.png
+)
+install(FILES assets/icons/weatherpaper-icon-24.png
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/24x24/apps
+    RENAME weatherpaper.png
+)
+install(FILES assets/icons/weatherpaper-icon-32.png
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/32x32/apps
+    RENAME weatherpaper.png
+)
+install(FILES assets/icons/weatherpaper-icon-256.png
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/256x256/apps
+    RENAME weatherpaper.png
+)
+install(FILES assets/icons/weatherpaper-icon.svg
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps
+    RENAME weatherpaper.svg
+)
+# Also copy all icons under weatherpaper/icons for runtime fallback lookup
+install(DIRECTORY assets/icons/
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/weatherpaper/icons
+)
+
+# Linux desktop environment integration
+if(UNIX AND NOT APPLE)
+    install(FILES packaging/linux/weatherpaper.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/applications
+    )
+    install(FILES packaging/linux/weatherpaper-autostart.desktop
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/weatherpaper
+    )
+    install(FILES packaging/linux/weatherpaper.service
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/systemd/user
+    )
+endif()
+
+# CPack configuration
+set(CPACK_PACKAGE_NAME "weatherpaper")
+set(CPACK_PACKAGE_VENDOR "WeatherPaper Contributors")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Lightweight live weather-reactive wallpaper engine")
+set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+set(CPACK_PACKAGE_HOMEPAGE_URL "https://github.com/Anas-Gazi/WeatherPaper")
+set(CPACK_PACKAGE_CONTACT "Anas Gazi <contact@example.com>")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/README.md")
+
+if(UNIX AND NOT APPLE)
+    set(CPACK_GENERATOR "DEB;TGZ")
+    set(CPACK_DEBIAN_PACKAGE_NAME "weatherpaper")
+    set(CPACK_DEBIAN_PACKAGE_SECTION "utils")
+    set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS OFF)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "libcurl4 | libcurl4t64, libssl3 | libssl3t64, libayatana-appindicator3-1, libqt6widgets6, libqt6core6, libgtk-3-0")
+    set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA
+        "${CMAKE_SOURCE_DIR}/packaging/linux/postinst;${CMAKE_SOURCE_DIR}/packaging/linux/prerm"
+    )
+elseif(WIN32)
+    set(CPACK_GENERATOR "NSIS;ZIP")
+    set(CPACK_NSIS_DISPLAY_NAME "WeatherPaper")
+    set(CPACK_NSIS_PACKAGE_NAME "WeatherPaper")
+    set(CPACK_NSIS_MODIFY_PATH ON)
+endif()
+
+include(CPack)

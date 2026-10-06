@@ -1,0 +1,19 @@
+[Unit]
+Description=WeatherPaper live weather wallpaper daemon
+Documentation=https://github.com/Anas-Gazi/WeatherPaper
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/weatherpaperd
+Restart=on-failure
+RestartSec=5s
+Environment=QT_QPA_PLATFORM=xcb;wayland
+
+# Lightweight sandboxing / resource control
+CPUWeight=20
+Nice=10
+
+[Install]
+WantedBy=graphical-session.target

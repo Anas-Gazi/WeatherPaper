@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    # Refresh application menu cache
+    if which update-desktop-database >/dev/null 2>&1; then
+        update-desktop-database -q /usr/share/applications || true
+    fi
+
+    # Refresh icon cache
+    if which gtk-update-icon-cache >/dev/null 2>&1; then
+        gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor || true
+    fi
+
+    # Auto-register XDG autostart if needed
+    if [ -f /usr/share/weatherpaper/weatherpaper-autostart.desktop ]; then
+        mkdir -p /etc/xdg/autostart
+        cp -f /usr/share/weatherpaper/weatherpaper-autostart.desktop /etc/xdg/autostart/weatherpaper.desktop 2>/dev/null || true
+    fi
+fi
+
+exit 0

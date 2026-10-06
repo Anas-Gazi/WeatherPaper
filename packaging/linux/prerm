@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "remove" ] || [ "$1" = "upgrade" ]; then
+    # Kill any running daemon instance gracefully
+    pkill -TERM -f weatherpaperd 2>/dev/null || true
+    rm -f /etc/xdg/autostart/weatherpaper.desktop 2>/dev/null || true
+fi
+
+exit 0

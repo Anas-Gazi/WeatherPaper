@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/anas/Downloads/WeatherPaper/src/modules/time_of_day/include
 
-CXX_FLAGS = -O2 -g -DNDEBUG -std=gnu++20
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

@@ -6,5 +6,5 @@ CXX_DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DWEATHE
 
 CXX_INCLUDES = -I/home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui/wp_settings_ui_autogen/include -I/home/anas/Downloads/WeatherPaper/src/modules/settings_ui/include -I/home/anas/Downloads/WeatherPaper/src/modules/config/include -I/home/anas/Downloads/WeatherPaper/src/modules/tag_system/include -I/home/anas/Downloads/WeatherPaper/src/modules/scaling_and_fit/include -I/home/anas/Downloads/WeatherPaper/src/modules/asset_manager/include -I/home/anas/Downloads/WeatherPaper/src/modules/weather_fetch/include -I/home/anas/Downloads/WeatherPaper/src/modules/wallpaper_engine_core/include -I/home/anas/Downloads/WeatherPaper/src/modules/time_of_day/include -isystem /usr/include/x86_64-linux-gnu/qt6/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui
 
-CXX_FLAGS = -O2 -g -DNDEBUG -std=gnu++20
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

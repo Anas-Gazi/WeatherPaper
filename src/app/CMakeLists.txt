@@ -38,3 +38,9 @@ target_compile_definitions(weatherpaperd PRIVATE
 )
 
 target_compile_features(weatherpaperd PRIVATE cxx_std_20)
+
+include(GNUInstallDirs)
+install(TARGETS weatherpaperd
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    BUNDLE DESTINATION .
+)

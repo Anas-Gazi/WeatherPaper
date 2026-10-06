@@ -6,5 +6,5 @@ CXX_DEFINES = -DWEATHERPAPER_WITH_CURL -DWEATHERPAPER_WITH_OPENSSL
 
 CXX_INCLUDES = -I/home/anas/Downloads/WeatherPaper/src/modules/asset_manager/include -I/home/anas/Downloads/WeatherPaper/src/modules/tag_system/include -I/home/anas/Downloads/WeatherPaper/src/modules/scaling_and_fit/include -I/home/anas/Downloads/WeatherPaper/src/modules/weather_fetch/include -I/home/anas/Downloads/WeatherPaper/src/modules/wallpaper_engine_core/include -I/home/anas/Downloads/WeatherPaper/src/modules/time_of_day/include -I/home/anas/Downloads/WeatherPaper/third_party
 
-CXX_FLAGS = -O2 -g -DNDEBUG -std=gnu++20
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++20
 

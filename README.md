@@ -45,11 +45,32 @@ exact, honest breakdown of what's tested versus what's a well-documented
 first draft, and [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to help close
 that gap.
 
+## Download & Installation
+
+### Windows 10 & Windows 11
+- **Installer:** Download `WeatherPaper-Setup-v1.0.0.exe` from GitHub Releases. Run the installer and optionally check *"Start WeatherPaper when Windows starts"*.
+- **Portable:** Download `WeatherPaper-Windows-Portable.zip`, extract anywhere, and run `install-portable.bat` for startup registration.
+
+### Linux (Ubuntu, Debian, Pop!_OS, Mint)
+- **Debian Package (.deb):**
+  ```bash
+  sudo dpkg -i weatherpaper-0.1.0-Linux.deb
+  sudo apt-get install -f
+  ```
+- **Universal Installer (Arch, Fedora, openSUSE, or non-root):**
+  ```bash
+  ./packaging/linux/install.sh
+  ```
+- **Build Release .deb Package:**
+  ```bash
+  ./packaging/linux/build-deb.sh
+  ```
+
 ## Quick start (build from source)
 
 ```bash
-sudo apt-get install cmake build-essential libssl-dev libcurl4-openssl-dev
-cmake -S . -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+sudo apt-get install cmake build-essential libssl-dev libcurl4-openssl-dev qt6-base-dev libayatana-appindicator3-dev
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DWEATHERPAPER_BUILD_SETTINGS_UI=ON -DWEATHERPAPER_BUILD_TRAY_UI=ON
 cmake --build build -j$(nproc)
 ctest --test-dir build --output-on-failure
 ./build/src/app/weatherpaperd --once

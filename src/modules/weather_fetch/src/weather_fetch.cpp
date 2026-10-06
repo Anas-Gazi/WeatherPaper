@@ -153,10 +153,18 @@ std::optional<WeatherSnapshot> OpenMeteoProvider::parse_response(const std::stri
     } catch (const std::exception&) {
         return std::nullopt;
     }
-    if (!j.contains("current") || !j.contains("daily")) return std::nullopt;
+    const json* cw_ptr = nullptr;
+    if (j.contains("current") && j["current"].is_object()) {
+        cw_ptr = &j["current"];
+    } else if (j.contains("current_weather") && j["current_weather"].is_object()) {
+        cw_ptr = &j["current_weather"];
+    } else {
+        return std::nullopt;
+    }
+    if (!j.contains("daily")) return std::nullopt;
 
     const int utc_offset = j.value("utc_offset_seconds", 0);
-    const auto& cw = j["current"];
+    const auto& cw = *cw_ptr;
     const auto& daily = j["daily"];
     if (!daily.contains("sunrise") || !daily.contains("sunset") ||
         !daily["sunrise"].is_array() || daily["sunrise"].empty() ||
@@ -171,8 +179,21 @@ std::optional<WeatherSnapshot> OpenMeteoProvider::parse_response(const std::stri
     WeatherSnapshot snap;
     snap.sunrise = *sunrise;
     snap.sunset = *sunset;
-    snap.temperature_c = cw.value("temperature_2m", 0.0);
-    snap.condition = wmo_weathercode_to_condition(cw.value("weather_code", 3));
+    if (cw.contains("temperature_2m")) {
+        snap.temperature_c = cw["temperature_2m"].get<double>();
+    } else if (cw.contains("temperature")) {
+        snap.temperature_c = cw["temperature"].get<double>();
+    } else {
+        snap.temperature_c = 0.0;
+    }
+
+    int code = 3;
+    if (cw.contains("weather_code")) {
+        code = cw["weather_code"].get<int>();
+    } else if (cw.contains("weathercode")) {
+        code = cw["weathercode"].get<int>();
+    }
+    snap.condition = wmo_weathercode_to_condition(code);
     snap.fetched_at = std::chrono::system_clock::now();
     snap.provider_name = "open-meteo";
     snap.is_severe = is_severe(snap.condition, snap.temperature_c);

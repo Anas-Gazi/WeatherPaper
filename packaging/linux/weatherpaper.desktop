@@ -1,0 +1,26 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WeatherPaper
+GenericName=Live Weather Wallpaper
+Comment=Automatically change desktop wallpaper based on live weather and solar time
+Exec=weatherpaperd
+Icon=weatherpaper
+Terminal=false
+Categories=Utility;Settings;
+Keywords=wallpaper;weather;background;desktop;live;
+StartupNotify=true
+StartupWMClass=WeatherPaper
+Actions=Gallery;Settings;Once;
+
+[Desktop Action Gallery]
+Name=Open Gallery
+Exec=weatherpaperd --gallery
+
+[Desktop Action Settings]
+Name=Open Settings
+Exec=weatherpaperd --settings
+
+[Desktop Action Once]
+Name=Update Wallpaper Now (Once)
+Exec=weatherpaperd --once

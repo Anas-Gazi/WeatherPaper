@@ -71,7 +71,7 @@ src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen: src/modules/settings_
 src/modules/settings_ui/wp_settings_ui_autogen/timestamp: /usr/lib/qt6/libexec/moc
 src/modules/settings_ui/wp_settings_ui_autogen/timestamp: src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/home/anas/Downloads/WeatherPaper/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC for target wp_settings_ui"
-	cd /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui && /usr/bin/cmake -E cmake_autogen /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen.dir/AutogenInfo.json RelWithDebInfo
+	cd /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui && /usr/bin/cmake -E cmake_autogen /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen.dir/AutogenInfo.json Release
 	cd /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui && /usr/bin/cmake -E touch /home/anas/Downloads/WeatherPaper/build/src/modules/settings_ui/wp_settings_ui_autogen/timestamp
 
 src/modules/settings_ui/CMakeFiles/wp_settings_ui_autogen.dir/codegen:

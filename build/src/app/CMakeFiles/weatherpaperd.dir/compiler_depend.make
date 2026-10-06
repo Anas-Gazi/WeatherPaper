@@ -56,6 +56,10 @@ src/app/CMakeFiles/weatherpaperd.dir/main.cpp.o: /home/anas/Downloads/WeatherPap
   /usr/include/c++/15/bits/exception_defines.h \
   /usr/include/c++/15/bits/exception_ptr.h \
   /usr/include/c++/15/bits/formatfwd.h \
+  /usr/include/c++/15/bits/fs_dir.h \
+  /usr/include/c++/15/bits/fs_fwd.h \
+  /usr/include/c++/15/bits/fs_ops.h \
+  /usr/include/c++/15/bits/fs_path.h \
   /usr/include/c++/15/bits/functexcept.h \
   /usr/include/c++/15/bits/functional_hash.h \
   /usr/include/c++/15/bits/hash_bytes.h \
@@ -157,6 +161,7 @@ src/app/CMakeFiles/weatherpaperd.dir/main.cpp.o: /home/anas/Downloads/WeatherPap
   /usr/include/c++/15/climits \
   /usr/include/c++/15/clocale \
   /usr/include/c++/15/cmath \
+  /usr/include/c++/15/codecvt \
   /usr/include/c++/15/compare \
   /usr/include/c++/15/concepts \
   /usr/include/c++/15/condition_variable \
@@ -179,6 +184,7 @@ src/app/CMakeFiles/weatherpaperd.dir/main.cpp.o: /home/anas/Downloads/WeatherPap
   /usr/include/c++/15/ext/numeric_traits.h \
   /usr/include/c++/15/ext/string_conversions.h \
   /usr/include/c++/15/ext/type_traits.h \
+  /usr/include/c++/15/filesystem \
   /usr/include/c++/15/format \
   /usr/include/c++/15/functional \
   /usr/include/c++/15/initializer_list \
@@ -892,8 +898,6 @@ src/app/CMakeFiles/weatherpaperd.dir/main.cpp.o:
 
 /usr/lib/x86_64-linux-gnu/libgdk-3.so:
 
-/usr/lib/x86_64-linux-gnu/libdbusmenu-glib.so:
-
 /usr/lib/x86_64-linux-gnu/libcairo.so:
 
 /usr/lib/x86_64-linux-gnu/libatk-1.0.so:
@@ -1030,8 +1034,6 @@ src/modules/config/libweatherpaper_config.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qyieldcpu.h:
 
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h:
-
 /usr/lib/x86_64-linux-gnu/libXdamage.so.1:
 
 /usr/include/x86_64-linux-gnu/qt6/QtGui/qfont.h:
@@ -1044,17 +1046,13 @@ src/modules/config/libweatherpaper_config.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qutf8stringview.h:
 
-/usr/include/sched.h:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtypes.h:
 
-/usr/include/wctype.h:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtversion.h:
 
 /usr/include/linux/stddef.h:
 
 /usr/include/c++/15/list:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/c++/15/bits/locale_classes.h:
 
 /usr/include/linux/posix_types.h:
 
@@ -1079,8 +1077,6 @@ src/modules/config/libweatherpaper_config.a:
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
 
 /usr/include/c++/15/tr1/bessel_function.tcc:
-
-/usr/include/c++/15/system_error:
 
 /usr/include/c++/15/string:
 
@@ -1116,21 +1112,17 @@ src/modules/config/libweatherpaper_config.a:
 
 /usr/include/c++/15/bits/predefined_ops.h:
 
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qttypetraits.h:
+
+/usr/include/c++/15/numeric:
+
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
-
-/usr/include/semaphore.h:
-
-/usr/include/c++/15/cmath:
 
 src/modules/time_of_day/libweatherpaper_time_of_day.a:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/c++/15/new:
-
-/usr/include/c++/15/numeric:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qttypetraits.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/15/libgcc_s.so:
 
@@ -1164,14 +1156,6 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 
 /usr/include/c++/15/bits/exception_ptr.h:
 
-/usr/lib/x86_64-linux-gnu/libc.so.6:
-
-/usr/include/linux/types.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qmath.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs.h:
-
 /usr/include/c++/15/debug/assertions.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtGui/qaction.h:
@@ -1182,9 +1166,25 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 
 /usr/include/c++/15/stdlib.h:
 
+/usr/include/c++/15/system_error:
+
+/usr/include/c++/15/codecvt:
+
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/lib/x86_64-linux-gnu/libXcomposite.so.1:
+
+/usr/include/c++/15/bits/exception.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/q23type_traits.h:
+
 /usr/include/endian.h:
 
 /usr/include/stdint.h:
+
+/usr/include/c++/15/cmath:
+
+/usr/include/semaphore.h:
 
 /usr/include/c++/15/bits/vector.tcc:
 
@@ -1216,8 +1216,6 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 
 /usr/include/c++/15/tr1/exp_integral.tcc:
 
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qtversion.h:
-
 /usr/include/c++/15/cassert:
 
 /usr/include/c++/15/bits/streambuf.tcc:
@@ -1242,19 +1240,11 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
-/usr/include/c++/15/bits/shared_ptr_base.h:
+/usr/include/c++/15/bits/stl_tempbuf.h:
 
-/usr/include/c++/15/bits/hashtable.h:
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:
 
-/usr/include/c++/15/bits/ranges_base.h:
-
-/usr/include/c++/15/ext/type_traits.h:
-
-/usr/include/c++/15/bits/functional_hash.h:
-
-/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qspan.h:
+/usr/include/c++/15/bits/stl_set.h:
 
 /usr/lib/x86_64-linux-gnu/libpng16.so.16:
 
@@ -1283,6 +1273,34 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 /usr/include/c++/15/bits/shared_ptr_atomic.h:
 
 /usr/include/c++/15/bits/stl_algo.h:
+
+/usr/lib/x86_64-linux-gnu/libdbusmenu-glib.so:
+
+/usr/include/c++/15/bits/fs_dir.h:
+
+/usr/include/x86_64-linux-gnu/sys/time.h:
+
+/usr/include/c++/15/bits/memory_resource.h:
+
+/usr/include/c++/15/bits/stl_function.h:
+
+/usr/lib/x86_64-linux-gnu/libayatana-appindicator3.so:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qforeach.h:
+
+/usr/lib/x86_64-linux-gnu/libpixman-1.so.0:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtconfiginclude.h:
+
+/home/anas/Downloads/WeatherPaper/src/modules/platform_common/include/weatherpaper/platform_common/platform_common.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0:
+
+/usr/include/c++/15/bits/invoke.h:
+
+/usr/include/c++/15/bits/locale_facets_nonio.tcc:
 
 /usr/include/c++/15/bits/codecvt.h:
 
@@ -1316,11 +1334,17 @@ src/modules/render_engine/libweatherpaper_render_engine.a:
 
 /usr/include/alloca.h:
 
+/usr/include/c++/15/bits/ranges_util.h:
+
+/usr/include/assert.h:
+
 /home/anas/Downloads/WeatherPaper/src/modules/config/include/weatherpaper/config/config.hpp:
 
 /usr/include/c++/15/pstl/pstl_config.h:
 
 /usr/include/c++/15/bits/basic_ios.tcc:
+
+/usr/include/c++/15/bits/ranges_base.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/q20iterator.h:
 
@@ -1350,6 +1374,18 @@ src/modules/wallpaper_engine_core/libweatherpaper_wallpaper_engine_core.a:
 
 /usr/include/c++/15/bits/stl_numeric.h:
 
+/usr/include/c++/15/bits/stl_raw_storage_iter.h:
+
+/usr/include/c++/15/bits/ostream.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio_lim.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qspan.h:
+
+/usr/include/c++/15/ext/type_traits.h:
+
+/usr/include/c++/15/bits/functional_hash.h:
+
 /usr/include/c++/15/bits/uses_allocator_args.h:
 
 /usr/include/c++/15/bits/chrono.h:
@@ -1359,6 +1395,8 @@ src/modules/wallpaper_engine_core/libweatherpaper_wallpaper_engine_core.a:
 /usr/include/c++/15/iomanip:
 
 /usr/include/c++/15/bits/shared_ptr.h:
+
+/usr/include/c++/15/bits/fs_path.h:
 
 /usr/include/c++/15/bits/formatfwd.h:
 
@@ -1375,8 +1413,6 @@ src/modules/wallpaper_engine_core/libweatherpaper_wallpaper_engine_core.a:
 /usr/lib/x86_64-linux-gnu/libayatana-ido3-0.4.so:
 
 /usr/include/c++/15/bits/stl_multiset.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qtypes.h:
 
 /lib64/ld-linux-x86-64.so.2:
 
@@ -1404,29 +1440,29 @@ src/modules/wallpaper_engine_core/libweatherpaper_wallpaper_engine_core.a:
 
 /usr/include/c++/15/bits/cpp_type_traits.h:
 
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qobject_impl.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qttranslation.h:
+
+/usr/include/c++/15/numbers:
+
+/usr/include/c++/15/exception:
+
+/usr/include/c++/15/backward/binders.h:
+
+/usr/include/c++/15/bits/specfun.h:
+
 /usr/include/c++/15/bits/version.h:
 
 /usr/include/linux/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar2-decl.h:
 
-/home/anas/Downloads/WeatherPaper/src/modules/time_of_day/include/weatherpaper/time_of_day/time_of_day.hpp:
-
-/usr/include/c++/15/semaphore:
-
-/usr/include/c++/15/bits/stl_multimap.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
-
 /usr/include/c++/15/bits/concept_check.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/q20memory.h:
 
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qobject_impl.h:
-
-/usr/include/c++/15/bits/specfun.h:
-
-/usr/include/c++/15/bits/stl_tempbuf.h:
+/home/anas/Downloads/WeatherPaper/src/modules/time_of_day/include/weatherpaper/time_of_day/time_of_day.hpp:
 
 /usr/lib/x86_64-linux-gnu/libXext.so.6:
 
@@ -1446,39 +1482,15 @@ src/modules/wallpaper_engine_core/libweatherpaper_wallpaper_engine_core.a:
 
 /usr/include/c++/15/ext/atomicity.h:
 
-/usr/include/pthread.h:
-
 /home/anas/Downloads/WeatherPaper/src/modules/weather_fetch/include/weatherpaper/weather_fetch/weather_fetch.hpp:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qbindingstorage.h:
-
-/home/anas/Downloads/WeatherPaper/src/modules/platform_common/include/weatherpaper/platform_common/platform_common.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
-/usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0:
-
-/usr/include/c++/15/bits/invoke.h:
-
-/usr/include/c++/15/bits/locale_facets_nonio.tcc:
-
-/usr/include/c++/15/bits/ranges_util.h:
-
-/usr/include/c++/15/bits/ostream.h:
-
-/usr/include/c++/15/bits/stl_raw_storage_iter.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qabstractitemmodel.h:
 
 /home/anas/Downloads/WeatherPaper/src/modules/notify/include/weatherpaper/notify/notify.hpp:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qiterable.h:
-
-src/modules/notify/libweatherpaper_notify.a:
-
-/usr/include/c++/15/bits/allocated_ptr.h:
-
-/usr/include/locale.h:
 
 /home/anas/Downloads/WeatherPaper/src/modules/render_engine/include/weatherpaper/render_engine/render_engine.hpp:
 
@@ -1534,7 +1546,19 @@ src/modules/notify/libweatherpaper_notify.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qgenericatomic.h:
 
-/usr/include/assert.h:
+/usr/include/c++/15/semaphore:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
+
+/usr/include/c++/15/bits/stl_multimap.h:
+
+/usr/include/c++/15/bits/shared_ptr_base.h:
+
+/usr/include/c++/15/bits/fs_ops.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qminmax.h:
+
+/usr/include/x86_64-linux-gnu/bits/unistd.h:
 
 /usr/include/c++/15/typeinfo:
 
@@ -1542,19 +1566,25 @@ src/modules/notify/libweatherpaper_notify.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qfunctionaltools_impl.h:
 
-/usr/include/c++/15/bits/locale_facets.h:
-
 /usr/lib/x86_64-linux-gnu/libgtk-3.so:
 
 src/modules/asset_manager/libweatherpaper_asset_manager.a:
 
 /usr/include/c++/15/bits/requires_hosted.h:
 
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qxptype_traits.h:
+
+/usr/include/c++/15/filesystem:
+
+/usr/include/c++/15/bits/locale_facets.h:
+
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/c++/15/bits/algorithmfwd.h:
 
 /usr/include/x86_64-linux-gnu/bits/semaphore.h:
 
-/usr/include/c++/15/bits/algorithmfwd.h:
+/usr/include/c++/15/bits/hashtable.h:
 
 /usr/lib/x86_64-linux-gnu/libsasl2.so.2:
 
@@ -1595,24 +1625,6 @@ src/modules/tag_system/libweatherpaper_tag_system.a:
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qtpreprocessorsupport.h:
 
 /usr/include/c++/15/cwchar:
-
-/usr/include/x86_64-linux-gnu/sys/time.h:
-
-/usr/include/c++/15/bits/memory_resource.h:
-
-/usr/include/c++/15/bits/stl_function.h:
-
-/usr/lib/x86_64-linux-gnu/libayatana-appindicator3.so:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qforeach.h:
-
-/usr/lib/x86_64-linux-gnu/libpixman-1.so.0:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qtconfiginclude.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qtcore-config.h:
-
-/usr/include/c++/15/bits/unicode-data.h:
 
 /usr/include/c++/15/bits/ranges_cmp.h:
 
@@ -1742,9 +1754,33 @@ src/modules/tag_system/libweatherpaper_tag_system.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qlocale.h:
 
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qdatastream.h:
+/usr/lib/x86_64-linux-gnu/libc.so.6:
 
-/usr/include/c++/15/bits/stl_set.h:
+/usr/include/linux/types.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qmath.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs.h:
+
+/usr/include/c++/15/bits/unicode-data.h:
+
+/usr/include/x86_64-linux-gnu/qt6/QtCore/qtcore-config.h:
+
+src/modules/notify/libweatherpaper_notify.a:
+
+/usr/include/c++/15/bits/allocated_ptr.h:
+
+/usr/include/locale.h:
+
+/usr/include/c++/15/bits/locale_classes.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/wctype.h:
 
 /usr/include/c++/15/tr1/ell_integral.tcc:
 
@@ -1946,14 +1982,6 @@ src/modules/scaling_and_fit/libweatherpaper_scaling_and_fit.a:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qswap.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
-/usr/lib/x86_64-linux-gnu/libXcomposite.so.1:
-
-/usr/include/c++/15/bits/exception.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/q23type_traits.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
@@ -2005,10 +2033,6 @@ src/modules/scaling_and_fit/libweatherpaper_scaling_and_fit.a:
 /usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qminmax.h:
-
-/usr/include/x86_64-linux-gnu/bits/unistd.h:
 
 /usr/include/c++/15/bits/uniform_int_dist.h:
 
@@ -2113,6 +2137,8 @@ src/modules/scaling_and_fit/libweatherpaper_scaling_and_fit.a:
 /usr/include/c++/15/bits/chrono_io.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qcompilerdetection.h:
+
+/usr/include/c++/15/bits/fs_fwd.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qsharedpointer_impl.h:
 
@@ -2251,11 +2277,3 @@ src/modules/scaling_and_fit/libweatherpaper_scaling_and_fit.a:
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qtmetamacros.h:
 
 /usr/include/x86_64-linux-gnu/qt6/QtCore/qtresource.h:
-
-/usr/include/c++/15/numbers:
-
-/usr/include/c++/15/exception:
-
-/usr/include/c++/15/backward/binders.h:
-
-/usr/include/x86_64-linux-gnu/qt6/QtCore/qttranslation.h:

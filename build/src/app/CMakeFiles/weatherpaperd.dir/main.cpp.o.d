@@ -537,4 +537,7 @@ src/app/CMakeFiles/weatherpaperd.dir/main.cpp.o: \
  /home/anas/Downloads/WeatherPaper/src/modules/tray_ui/include/weatherpaper/tray_ui/tray_ui.hpp \
  /home/anas/Downloads/WeatherPaper/src/modules/notify/include/weatherpaper/notify/notify.hpp \
  /home/anas/Downloads/WeatherPaper/src/modules/platform_common/include/weatherpaper/platform_common/platform_common.hpp \
- /home/anas/Downloads/WeatherPaper/src/modules/render_engine/include/weatherpaper/render_engine/render_engine.hpp
+ /home/anas/Downloads/WeatherPaper/src/modules/render_engine/include/weatherpaper/render_engine/render_engine.hpp \
+ /usr/include/c++/15/filesystem /usr/include/c++/15/bits/fs_fwd.h \
+ /usr/include/c++/15/bits/fs_path.h /usr/include/c++/15/codecvt \
+ /usr/include/c++/15/bits/fs_dir.h /usr/include/c++/15/bits/fs_ops.h

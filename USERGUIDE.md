@@ -1,10 +1,45 @@
 # WeatherPaper — User Guide
 
 WeatherPaper changes your desktop wallpaper to match the weather and time
-of day where you live. This guide covers day-to-day use. If you're a
+of day where you live. This guide covers installation and day-to-day use. If you're a
 developer looking to build or extend the app, see
 [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`ARCHITECTURE.md`](ARCHITECTURE.md)
 instead.
+
+## Installation & Setup
+
+WeatherPaper is designed to be extremely lightweight, taking virtually **0% CPU** at idle, **< 40 MB of RAM**, and **0 GPU resources** for static wallpapers.
+
+### Windows 10 & Windows 11
+
+1. **Download the Installer:**
+   - Download `WeatherPaper-Setup-v1.0.0.exe` from the latest GitHub Release (or compile using `packaging/windows/build-windows.bat`).
+2. **Install:**
+   - Double-click the installer and follow the setup wizard.
+   - You can choose to automatically start WeatherPaper when Windows boots.
+   - A shortcut will be placed in your Start Menu and system tray.
+3. **Portable Mode (Alternative):**
+   - Download `WeatherPaper-Windows-Portable.zip`.
+   - Extract anywhere, and double-click `packaging/windows/install-portable.bat` to register autostart.
+
+### Linux (Ubuntu, Debian, Linux Mint, Pop!_OS)
+
+1. **Debian Package (`.deb`):**
+   - Download `weatherpaper-0.1.0-Linux.deb` from the release assets.
+   - Install via terminal:
+     ```bash
+     sudo dpkg -i weatherpaper-0.1.0-Linux.deb
+     sudo apt-get install -f   # ensures any missing runtime libs are installed
+     ```
+   - Or right-click the `.deb` file in your file manager and select **Open With Software Install**.
+2. **Universal Linux Installer (No root / Any Distro):**
+   - If using Arch, Fedora, openSUSE, or installing without `sudo`:
+     ```bash
+     ./packaging/linux/install.sh
+     ```
+   - This installs WeatherPaper into `~/.local/bin`, adds desktop shortcuts, sets up icons, and configures login autostart.
+
+---
 
 ## What you'll see
 

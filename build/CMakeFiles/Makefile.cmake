@@ -161,6 +161,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-4.2/Modules/CMakeLanguageInformation.cmake"
   "/usr/share/cmake-4.2/Modules/CMakeSystemSpecificInformation.cmake"
   "/usr/share/cmake-4.2/Modules/CMakeSystemSpecificInitialize.cmake"
+  "/usr/share/cmake-4.2/Modules/CPack.cmake"
+  "/usr/share/cmake-4.2/Modules/CPackComponent.cmake"
   "/usr/share/cmake-4.2/Modules/CheckCXXCompilerFlag.cmake"
   "/usr/share/cmake-4.2/Modules/CheckCXXSourceCompiles.cmake"
   "/usr/share/cmake-4.2/Modules/CheckIncludeFileCXX.cmake"
@@ -194,6 +196,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-4.2/Modules/Platform/Linux.cmake"
   "/usr/share/cmake-4.2/Modules/Platform/UnixPaths.cmake"
   "/usr/share/cmake-4.2/Modules/SelectLibraryConfigurations.cmake"
+  "/usr/share/cmake-4.2/Templates/CPackConfig.cmake.in"
   )
 
 # The corresponding makefile is:
@@ -204,6 +207,8 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "CPackConfig.cmake"
+  "CPackSourceConfig.cmake"
   ".qt/QtDeployTargets.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/modules/time_of_day/CMakeFiles/CMakeDirectoryInformation.cmake"
