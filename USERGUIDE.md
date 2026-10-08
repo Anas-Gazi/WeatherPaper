@@ -173,4 +173,4 @@ If none of these match your setup, please file an issue — see
 **Video wallpaper doesn't appear even though I enabled it.** This is a
 known current limitation — see `ARCHITECTURE.md`'s verification-status
 notes. Static wallpapers are fully supported; video wallpaper rendering is
-still being finished.
+still being finished .
