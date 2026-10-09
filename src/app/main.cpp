@@ -47,6 +47,7 @@
 #define WIN32_LEAN_AND_MEAN
 #endif
 #include <windows.h>
+#include <objbase.h>
 #endif
 
 #ifndef WEATHERPAPER_BUNDLED_ASSETS_DIR
@@ -229,12 +230,31 @@ bool run_pipeline_once(wp::config::AppConfig& cfg,
 } // namespace
 
 int main(int argc, char** argv) {
+#ifdef _WIN32
+    HRESULT com_hr = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
+    if (FAILED(com_hr)) {
+        std::cerr << "[weatherpaper] COM initialization failed: 0x"
+                  << std::hex << static_cast<unsigned long>(com_hr) << std::dec << "\n";
+        return 1;
+    }
+
+    struct ComGuard {
+        ~ComGuard() { CoUninitialize(); }
+    } com_guard;
+#endif
+
     bool once = false;
     std::string screenshot_file;
+
     for (int i = 1; i < argc; ++i) {
-        if (std::string(argv[i]) == "--once") once = true;
-        if (std::string(argv[i]) == "--screenshot" && i + 1 < argc) {
+        std::string arg = argv[i];
+        if (arg == "--once") {
+            once = true;
+        } else if (arg == "--screenshot" && i + 1 < argc) {
             screenshot_file = argv[++i];
+        } else {
+            std::cerr << "[weatherpaper] unknown argument: " << arg << "\n";
+            return 1;
         }
     }
 

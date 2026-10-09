@@ -1,2 +1,0 @@
-/usr/bin/ar qc libweatherpaper_asset_manager.a CMakeFiles/wp_asset_manager.dir/src/asset_manager.cpp.o
-/usr/bin/ranlib libweatherpaper_asset_manager.a

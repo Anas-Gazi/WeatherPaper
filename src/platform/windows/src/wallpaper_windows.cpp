@@ -25,6 +25,7 @@
 #include <wrl/client.h> // Microsoft::WRL::ComPtr
 
 #include <sstream>
+#include <iostream>
 
 #include "weatherpaper/platform_common/platform_common.hpp"
 
@@ -73,9 +74,13 @@ public:
         // this class assumes it has already happened, consistent with
         // "one COM apartment per process" best practice rather than each
         // module initializing/uninitializing COM independently.
-        HRESULT hr = CoCreateInstance(CLSID_DesktopWallpaper, nullptr, CLSCTX_INPROC_SERVER,
+        HRESULT hr = CoCreateInstance(CLSID_DesktopWallpaper, nullptr, CLSCTX_ALL,
                                         IID_PPV_ARGS(&wallpaper_));
         com_ok_ = SUCCEEDED(hr);
+if (!com_ok_) {
+    std::cerr << "[weatherpaper] CoCreateInstance failed: 0x"
+              << std::hex << static_cast<unsigned long>(hr) << std::dec << "\n";
+}
     }
 
     platform_common::SetWallpaperResult set_static_wallpaper(

@@ -44,7 +44,7 @@ void WindowsToastNotifier::show(const NotificationText& text) noexcept {
     nid.uID = 1;
     nid.uFlags = NIF_INFO | NIF_ICON | NIF_TIP;
     nid.dwInfoFlags = NIIF_WARNING;
-    nid.hIcon = LoadIconW(nullptr, IDI_WARNING);
+    nid.hIcon = LoadIconW(nullptr, MAKEINTRESOURCEW(32516));
     wcsncpy_s(nid.szTip, L"WeatherPaper", _TRUNCATE);
 
     // Best-effort narrow->wide conversion; truncation on very long text is

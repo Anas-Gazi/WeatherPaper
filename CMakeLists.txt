@@ -186,6 +186,29 @@ elseif(WIN32)
     set(CPACK_NSIS_DISPLAY_NAME "WeatherPaper")
     set(CPACK_NSIS_PACKAGE_NAME "WeatherPaper")
     set(CPACK_NSIS_MODIFY_PATH ON)
+
+    get_filename_component(WEATHERPAPER_MINGW_BIN_DIR
+        "${CMAKE_CXX_COMPILER}" DIRECTORY
+    )
+
+    foreach(WEATHERPAPER_RUNTIME_DLL
+        libstdc++-6.dll
+        libgcc_s_seh-1.dll
+        libwinpthread-1.dll
+    )
+        install(FILES
+            "${WEATHERPAPER_MINGW_BIN_DIR}/${WEATHERPAPER_RUNTIME_DLL}"
+            DESTINATION ${CMAKE_INSTALL_BINDIR}
+        )
+    endforeach()
+
+    install(FILES
+        "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin/libcurl.dll"
+        "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/bin/libz.dll"
+        DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
 endif()
 
 include(CPack)
+
+

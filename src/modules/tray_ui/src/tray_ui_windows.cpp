@@ -50,7 +50,7 @@ public:
         MultiByteToWideChar(CP_UTF8, 0, icon_path.c_str(), -1, wpath.data(), wlen);
         nid_.hIcon = static_cast<HICON>(LoadImageW(nullptr, wpath.c_str(), IMAGE_ICON, 16, 16,
                                                       LR_LOADFROMFILE));
-        if (nid_.hIcon == nullptr) nid_.hIcon = LoadIconW(nullptr, IDI_APPLICATION); // graceful fallback
+        if (nid_.hIcon == nullptr) nid_.hIcon = LoadIconW(nullptr, MAKEINTRESOURCEW(32512)); // graceful fallback
         wcsncpy_s(nid_.szTip, L"WeatherPaper", _TRUNCATE);
 
         return Shell_NotifyIconW(NIM_ADD, &nid_) == TRUE;
@@ -135,3 +135,4 @@ std::unique_ptr<ITrayIcon> create_platform_tray_icon() {
 
 } // namespace weatherpaper::tray_ui
 #endif // _WIN32
+

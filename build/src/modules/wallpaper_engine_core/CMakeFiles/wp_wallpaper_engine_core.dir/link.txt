@@ -1,2 +1,0 @@
-/usr/bin/ar qc libweatherpaper_wallpaper_engine_core.a CMakeFiles/wp_wallpaper_engine_core.dir/src/wallpaper_engine_core.cpp.o
-/usr/bin/ranlib libweatherpaper_wallpaper_engine_core.a

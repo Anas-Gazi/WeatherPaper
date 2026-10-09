@@ -1,2 +1,0 @@
-/usr/bin/ar qc libweatherpaper_time_of_day.a CMakeFiles/wp_time_of_day.dir/src/time_of_day.cpp.o
-/usr/bin/ranlib libweatherpaper_time_of_day.a

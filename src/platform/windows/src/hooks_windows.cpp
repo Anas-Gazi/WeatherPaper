@@ -58,7 +58,7 @@ bool read_is_connected_to_internet() {
     HRESULT hr = CoCreateInstance(CLSID_NetworkListManager, nullptr, CLSCTX_ALL, IID_PPV_ARGS(&nlm));
     if (FAILED(hr) || nlm == nullptr) return true; // fail open
     VARIANT_BOOL connected = VARIANT_FALSE;
-    nlm->get_IsConnectedToInternet(&connected);
+    nlm->IsConnectedToInternet(&connected);
     return connected == VARIANT_TRUE;
 }
 

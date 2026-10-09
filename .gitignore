@@ -19,6 +19,9 @@ Testing/
 *.tar.gz
 *.zip
 *.exe
+_CPack_Packages/
+package-test/
+package-test-2/
 
 # User cache & runtime data
 *.log

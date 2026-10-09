@@ -1,2 +1,0 @@
-/usr/bin/ar qc libweatherpaper_tag_system.a CMakeFiles/wp_tag_system.dir/src/tag_system.cpp.o
-/usr/bin/ranlib libweatherpaper_tag_system.a

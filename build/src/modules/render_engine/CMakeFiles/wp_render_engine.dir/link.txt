@@ -1,2 +1,0 @@
-/usr/bin/ar qc libweatherpaper_render_engine.a CMakeFiles/wp_render_engine.dir/src/render_engine.cpp.o
-/usr/bin/ranlib libweatherpaper_render_engine.a
