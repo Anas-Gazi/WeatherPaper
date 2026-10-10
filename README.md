@@ -17,7 +17,7 @@ Built in C++20 with a modular architecture, event-driven updates, and an offline
 - **Efficient updates:** Uses event-driven and timer-based processing rather than continuous busy polling.
 - **Cross-platform architecture:** Provides Windows and Linux platform backends.
 
-Weather data is provided by [Open-Meteo](https://open-meteo.com), which does not require an API key for its standard weather API.
+Weather data is provided by [Open-Meteo](https://open-meteo.com/), which does not require an API key for its standard weather API.
 
 ## Project status
 
@@ -27,7 +27,7 @@ The Windows and Linux implementations have different levels of platform-specific
 
 ## Download and installation
 
-Download prebuilt packages from the **[GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases)**.
+Download prebuilt packages from the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases).
 
 ### Windows 10 and Windows 11
 
@@ -40,17 +40,19 @@ Two package formats are intended to be available:
 
 **Windows Setup**
 
-Download `WeatherPaper-Setup-v1.0.0.exe` from the release assets, run it, and follow the setup wizard. The installer can create shortcuts and offers optional startup configuration.
+Download `WeatherPaper-Setup-v1.0.0.exe` from the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases) and run it. Follow the setup wizard to install WeatherPaper.
+
+The installer can create a desktop shortcut and offers optional automatic startup. After installation, you can launch WeatherPaper from the Start Menu.
 
 **Portable ZIP**
 
-Download `WeatherPaper-v1.0.0-windows-x64.zip`, extract it to a folder, and run `WeatherPaper.exe`.
+Download `WeatherPaper-v1.0.0-windows-x64.zip` from the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases), extract it to a folder, and run `WeatherPaper.exe`.
 
-To configure automatic startup for the portable version, run `install-portable.bat` from the extracted folder. This changes your current Windows user's startup configuration; it does not install the application system-wide.
+To configure automatic startup for the portable version, run `install-portable.bat` from the extracted folder.
 
-For complete instructions, troubleshooting, and removal steps, see [INSTALL.md](INSTALL.md).
+For complete installation, troubleshooting, and removal instructions, see [INSTALL.md](INSTALL.md).
 
-> The download links above require the corresponding files to be uploaded to GitHub Releases. If a file is not attached to the release yet, use the Releases page to check which packages are currently available.
+> Download links depend on the corresponding files being attached to a GitHub Release. Check the Releases page to see which packages are currently available.
 
 ### Linux
 
@@ -104,16 +106,16 @@ WeatherPaper/
 ├── assets/
 │   └── default_theme/       # Bundled default wallpaper theme
 ├── src/
-│   ├── modules/              # Reusable application modules
+│   ├── modules/             # Reusable application modules
 │   ├── platform/
-│   │   ├── windows/          # Windows platform backend
-│   │   └── linux/            # Linux platform backend
-│   └── app/                  # Application entry point and launcher target
+│   │   ├── windows/         # Windows platform backend
+│   │   └── linux/           # Linux platform backend
+│   └── app/                 # Application entry point and launcher target
 ├── packaging/
-│   ├── windows/              # Windows installer and packaging scripts
-│   └── linux/                # Linux packaging and installation scripts
-├── tests/                    # Unit tests
-├── third_party/              # Vendored dependencies
+│   ├── windows/             # Windows installer and packaging scripts
+│   └── linux/               # Linux packaging and installation scripts
+├── tests/                   # Unit tests
+├── third_party/             # Vendored dependencies
 ├── CMakeLists.txt
 ├── INSTALL.md
 ├── USERGUIDE.md
