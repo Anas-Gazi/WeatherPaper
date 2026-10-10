@@ -19,6 +19,7 @@ OutputBaseFilename=WeatherPaper-Setup-v{#MyAppVersion}
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
+SetupIconFile=..\..\assets\icons\weatherpaper.ico
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 PrivilegesRequired=lowest
@@ -35,11 +36,12 @@ Name: "autostart"; Description: "Start WeatherPaper automatically when I log in"
 Source: "..\..\dist\WeatherPaper-Windows-Portable\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{autoprograms}\WeatherPaper"; Filename: "{app}\WeatherPaper.exe"; WorkingDir: "{app}"
-Name: "{autodesktop}\WeatherPaper"; Filename: "{app}\WeatherPaper.exe"; WorkingDir: "{app}"; Tasks: desktopicon
+Name: "{autoprograms}\WeatherPaper"; Filename: "{app}\WeatherPaper.exe"; WorkingDir: "{app}"; IconFilename: "{app}\WeatherPaper.exe"
+Name: "{autodesktop}\WeatherPaper"; Filename: "{app}\WeatherPaper.exe"; WorkingDir: "{app}"; IconFilename: "{app}\WeatherPaper.exe"; Tasks: desktopicon
 
 [Registry]
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "WeatherPaper"; ValueData: """{app}\WeatherPaper.exe"""; Flags: uninsdeletevalue; Tasks: autostart
 
 [Run]
 Filename: "{app}\WeatherPaper.exe"; Description: "Launch WeatherPaper"; Flags: nowait postinstall skipifsilent
+

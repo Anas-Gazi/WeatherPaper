@@ -48,11 +48,21 @@ install(TARGETS weatherpaperd
 
 
 if(WIN32)
+    enable_language(RC)
+    configure_file(
+        "${CMAKE_SOURCE_DIR}/packaging/windows/weatherpaper.rc.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/weatherpaper.rc"
+        @ONLY
+    )
+
     add_executable(WeatherPaper WIN32
         "${CMAKE_SOURCE_DIR}/packaging/windows/weatherpaper_launcher.cpp"
+        "${CMAKE_CURRENT_BINARY_DIR}/weatherpaper.rc"
     )
 
     install(TARGETS WeatherPaper
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
 endif()
+
+
