@@ -170,30 +170,24 @@ separately — see `updater.hpp`.
 
 ## 6. Verification status — please read before trusting a module
 
-This was built and tested in a Linux-only sandbox with no Windows
-toolchain and no live GUI/display-server session. Being precise about what
-that means:
+Verification status distinguishes compilation, unit testing, interactive testing, and end-to-end behavior. A successful build does not prove that every platform-specific feature works correctly.
 
 | Status | Modules |
 |---|---|
-| **Compiled + unit-tested in this environment** | `time_of_day`, `scaling_and_fit`, `tag_system`, `wallpaper_engine_core`, `config`, `weather_fetch`, `render_engine` (incl. real FFmpeg decode path), `asset_manager` (incl. real OpenSSL sign/verify round-trip), `updater`, `notify` (Linux notifier), `platform_linux` (backend/detection logic — the highest-risk module, fully tested) |
-| **Compiled (real deps installed) but not run interactively** | `tray_ui` (AppIndicator3/GTK3 — compiles, needs a real tray host to click-test), `settings_ui` (Qt6 Widgets — compiles, needs a real X/Wayland session to click-test) |
-| **Written against documented APIs, NOT compiled (no Windows SDK available)** | `platform_windows` (`IDesktopWallpaper`, WTS/power/network hooks), `notify`'s `WindowsToastNotifier`, `tray_ui`'s `WindowsTrayIcon` |
-| **End-to-end pipeline run** | `src/app/main.cpp` (`weatherpaperd --once`) was executed in this sandbox: it loads the bundled theme, attempts a live weather fetch (fails — sandbox network is allow-listed and excludes `api.open-meteo.com`), falls back correctly, resolves an exact tag match, detects the (nonexistent, in-sandbox) desktop environment correctly as `Unknown`/`GenericX11` depending on env vars, and reports the expected graceful failure to actually set a wallpaper (there is no real desktop here). This proves the *wiring* is correct end to end. |
+| **Compiled + unit-tested in the original Linux test environment** | `time_of_day`, `scaling_and_fit`, `tag_system`, `wallpaper_engine_core`, `config`, `weather_fetch`, `render_engine` (including the tested FFmpeg decode path), `asset_manager` (including the OpenSSL sign/verify test), `updater`, `notify` (Linux notifier), and `platform_linux` backend/detection logic. Preserve the original test counts and results recorded for this environment. |
+| **Compiled in the Linux environment but not fully tested interactively** | `tray_ui` (AppIndicator3/GTK3 — needs a real tray host to click-test) and `settings_ui` (Qt6 Widgets — needs a real X/Wayland session to click-test). |
+| **Windows build and launcher smoke-tested locally; full feature verification incomplete** | The Windows application and console-free `WeatherPaper.exe` launcher have been built locally using MinGW-w64 and Qt 6. The installed launcher was launched successfully, and the installed theme directory was verified to contain `tags.json`. This confirms the tested application can start and that the expected theme file exists in the install tree. It does not prove that all Windows platform APIs, wallpaper-setting behavior, tray interactions, notifications, startup behavior, or release packages work correctly. |
+| **Requires additional platform-specific testing** | Windows COM and system-event integration, interactive GUI behavior, setup and portable package installation on a clean Windows environment, and any feature not explicitly tested on its target OS. |
 
-**The single highest-priority follow-up** is implementing
-`render_engine::IVideoSurface` for real (the WorkerW-technique window on
-Windows, an override-redirect/layer-shell surface on Linux) — see
-`CONTRIBUTING.md` section "Implementing IVideoSurface". Everything upstream
-of it (decoding, compositing math, pause/resume logic) is already built and
-tested; only the final "put pixels on a window behind the desktop icons"
-step is unimplemented, because it needs a real display server to develop
-against interactively.
+The original Linux end-to-end pipeline test remains a record of the Linux sandbox test: `src/app/main.cpp` (`weatherpaperd --once`) loaded the bundled theme, attempted a live weather fetch (which failed because the sandbox network did not allow access to `api.open-meteo.com`), fell back correctly, resolved a tag match, and reported the expected inability to set a wallpaper without a real desktop environment.
+
+This demonstrates the tested Linux pipeline's wiring and fallback behavior. It should not be interpreted as proof of Windows end-to-end behavior.
+
+The single highest-priority follow-up for animated wallpapers remains implementing `render_engine::IVideoSurface` for real — the WorkerW-technique window on Windows, or an appropriate presentation surface on Linux. See `CONTRIBUTING.md`, section "Implementing IVideoSurface". Decoding and compositing logic does not, by itself, display video frames on the desktop.
 
 ## 7. Known limitations (good first issues)
 
-- **Windows build is unverified.** See section 6. First contribution: get it
-  compiling in CI on `windows-latest`, fix whatever doesn't match reality.
+-**Windows feature and release verification is incomplete.** A local MinGW/Qt build and launcher smoke test have succeeded, but the full Windows feature set and final release packages still need clean-environment testing. See section 6 and `CONTRIBUTING.md` for the verification checklist.
 - **`IVideoSurface` is unimplemented** (see section 6) — animated wallpapers
   decode and composite correctly in memory but never reach a screen yet.
 - **XFCE per-monitor property paths** are version/monitor-name-dependent;

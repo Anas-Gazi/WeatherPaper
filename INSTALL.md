@@ -1,106 +1,153 @@
-# WeatherPaper — Download & Installation Guide
+# WeatherPaper — Download and Installation Guide
 
-This guide contains the official download links and step-by-step instructions for installing and running **WeatherPaper** on **Linux** and **Windows 10 / 11**.
+This guide explains how to download, install, run, and uninstall WeatherPaper on Windows 10/11 and Linux.
 
----
+## Official downloads
 
-## 🔗 Official Download Links
+**[Open WeatherPaper Releases on GitHub](https://github.com/Anas-Gazi/WeatherPaper/releases)**
 
-All releases and installer binaries are published on GitHub Releases:
+Download packages only from the official repository's Releases page.
 
-👉 **Releases Page:** [https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0](https://github.com/Anas-Gazi/WeatherPaper/releases/tag/v0.1.0)
+### Windows packages
 
-### Direct Download Links (v0.1.0)
+| Package | Description |
+|---|---|
+| `WeatherPaper-Setup-v1.0.0.exe` | Graphical Windows installer |
+| `WeatherPaper-v1.0.0-windows-x64.zip` | Portable application archive |
 
-| Platform | Package Type | Direct Download Link | Description |
-| :--- | :--- | :--- | :--- |
-| **Linux (All Distros)** | **⚡ One-Click Installer** | [**Download `weatherpaper-installer.run`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run) | **Single clickable file.** Installs all files, shortcuts, icons, and autostart automatically! |
-| **Linux (Ubuntu / Debian / Mint)** | `.deb` Package | [Download `weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb) | Standard Debian package for `dpkg`/`apt`. |
-| **Linux (Any Distro - Standalone)** | `.tar.gz` Archive | [Download `weatherpaper-0.1.0-Linux.tar.gz`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.tar.gz) | Portable tarball archive. |
-| **Windows 10 & 11** | **⚡ 1-Click Installer** | [**Download `WeatherPaper-Setup.exe`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-Setup.exe) | **One click.** Download, run, and WeatherPaper installs everything automatically! |
+These filenames must match the actual release assets. If either package is not listed on the release page, it has not been published there under that filename.
 
 ---
 
-## 🐧 Linux Installation
+## Windows 10 and Windows 11
 
-### Method A: ⚡ One-Click Installer (`weatherpaper-installer.run`) — Easiest
+### Method A — Windows Setup installer
 
-1. **Download:** [**`weatherpaper-installer.run`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run)
-2. **Run it:**
-   - Either **Right-click** → **Properties** → **Permissions** → check **"Allow executing file as program"**, then **Double-Click** it.
-   - Or run in terminal:
-     ```bash
-     chmod +x ~/Downloads/weatherpaper-installer.run
-     ~/Downloads/weatherpaper-installer.run
-     ```
-3. **Done!** The installer automatically:
-   - Extracts and installs the program and all required assets and themes.
-   - Creates the application shortcut in your desktop app launcher with the WeatherPaper logo.
-   - Configures automatic startup when your PC boots or logs in.
-   - Launches WeatherPaper in the background immediately with a success notification!
+This is the recommended option for users who want a conventional installation.
 
-### Method B: Debian Package (`.deb`)
+1. Open the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases).
+2. Download `WeatherPaper-Setup-v1.0.0.exe` from the appropriate release.
+3. Open the downloaded installer.
+4. If Windows displays a security warning, verify that you downloaded the file from the official repository before deciding whether to proceed.
+5. Follow the setup wizard and choose the installation options you want.
+6. After installation, launch WeatherPaper from the Start menu or an available shortcut.
 
+The installer is designed to install the application files locally. Depending on the options you select, it can also create a desktop shortcut and configure automatic startup when you sign in to Windows.
 
-1. Open a terminal and navigate to the directory where you downloaded the `.deb` file:
-   ```bash
-   cd ~/Downloads
-   ```
+### Method B — Portable ZIP
 
-2. Install the package using `dpkg`:
-   ```bash
-   sudo dpkg -i weatherpaper-0.1.0-Linux.deb
-   sudo apt-get install -f
-   ```
-   *(Running `sudo apt-get install -f` automatically resolves and installs any required dependencies like Qt runtime libraries).*
+Choose this option if you prefer to keep WeatherPaper in a folder of your choice.
 
-### Method B: Graphical Interface (GUI)
+1. Open the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases).
+2. Download `WeatherPaper-v1.0.0-windows-x64.zip`.
+3. Right-click the ZIP file and select **Extract All...**.
+4. Extract it to a folder where you want to keep WeatherPaper.
+5. Open the extracted folder.
+6. Double-click `WeatherPaper.exe` to launch the application.
 
-1. Open your file manager and navigate to your **Downloads** folder.
-2. Double-click on `weatherpaper-0.1.0-Linux.deb`.
-3. Your system's Software Center or package installer will appear. Click **Install** and enter your password.
+Keep the extracted files together. The application needs its bundled runtime dependencies, plugins, and theme assets.
 
-### Running WeatherPaper on Linux
+#### Optional: Configure automatic startup
 
-- **Application Menu:** Press the `Super` (Windows) key, search for **WeatherPaper**, and click the icon.
-- **Terminal:** You can launch the daemon directly anytime by typing:
-  ```bash
-  weatherpaperd
-  ```
-- **System Tray:** A weather indicator icon will appear in your top bar / system tray. Right-click it to open the Settings, view the Gallery, or manually force a wallpaper refresh.
+To configure WeatherPaper to start automatically when you sign in to Windows:
 
-### Uninstalling from Linux
+1. Open the extracted WeatherPaper folder.
+2. Run `install-portable.bat`.
+3. Follow the prompts displayed by the script.
+
+The script configures startup for the current Windows user. It does not install WeatherPaper system-wide.
+
+To disable portable automatic startup, run `uninstall-portable.bat` if that script is included in your downloaded package. Otherwise, remove the WeatherPaper entry from the following Windows Registry location:
+
+`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
+
+Remove only the value named `WeatherPaper`.
+
+---
+
+## Uninstalling WeatherPaper on Windows
+
+### If you used the setup installer
+
+1. Open **Settings**.
+2. Navigate to **Apps → Installed apps**.
+3. Find **WeatherPaper**.
+4. Select the uninstall option and follow the prompts.
+
+### If you used the portable ZIP
+
+1. Disable automatic startup first, if you enabled it.
+2. Close WeatherPaper.
+3. Delete the folder where you extracted the application.
+
+Deleting the portable folder alone may not remove an automatic-startup entry. Remove that entry before deleting the folder.
+
+---
+
+## Linux installation
+
+Linux packages and installation options are published through the [GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases), when available.
+
+### Debian, Ubuntu, and compatible distributions
+
+If a Debian package is attached to the release, download it and install it using:
+
+```bash
+sudo dpkg -i weatherpaper-0.1.0-Linux.deb
+sudo apt-get install -f
+```
+
+Replace the filename with the exact package name shown in the release assets if it differs.
+
+### Universal installer
+
+If `weatherpaper-installer.run` is available in the release assets, download it and run:
+
+```bash
+chmod +x weatherpaper-installer.run
+./weatherpaper-installer.run
+```
+
+Review the script and its requested permissions before running installers downloaded from the internet.
+
+### Running WeatherPaper
+
+Depending on the package and desktop environment, launch WeatherPaper from the application menu or use the installed executable where supported.
+
+### Uninstalling on Debian-based systems
+
+If WeatherPaper was installed as a Debian package:
 
 ```bash
 sudo apt remove weatherpaper
 ```
 
----
-
-## 🪟 Windows 10 & 11 Installation
-
-### Method A: ⚡ One-Click Installer — Easiest
-
-1. **Download:** [**`WeatherPaper-Setup.exe`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-Setup.exe)
-2. **Run it:** Double-click `WeatherPaper-Setup.exe`. Windows may show a SmartScreen prompt — click **More info** → **Run anyway**.
-3. **Done!** The installer automatically downloads and sets up all files, creates a desktop shortcut, and configures WeatherPaper to start with Windows.
-
-### Method B: Portable ZIP (No Installation)
-
-1. **Download:** [`WeatherPaper-v1.0.0-windows-x64.zip`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip)
-2. **Extract:** Right-click → **Extract All...** to a folder of your choice.
-3. **Run:** Double-click `install-portable.bat` inside the extracted folder to launch and configure autostart.
-
-
-### Uninstalling from Windows
-
-- Open **Windows Settings** → **Apps** → **Installed apps**.
-- Find **WeatherPaper** in the list, click the three dots (`...`), and select **Uninstall**.
+Use the uninstallation method appropriate to the package you installed.
 
 ---
 
-## 💡 Quick Tips & Features
+## Troubleshooting
 
-- **Drag and Drop Wallpapers:** Open the **Gallery** tab and drag your favorite images or videos directly into the drop zone.
-- **Instant Refresh:** When you tag an image (e.g. `Night`, `Rain`, `Sunny`) or click **🔄 Refresh Wallpaper**, your desktop wallpaper updates immediately without restarting the program.
-- **Ultra Lightweight:** Uses ~38 MB RAM and 0% CPU when idle.
+### The application does not start on Windows
+
+- Make sure you extracted the entire portable ZIP rather than running the executable from inside the archive.
+- Keep all DLLs, Qt plugin directories, and bundled assets in their original relative locations.
+- Download the package again if files are missing or extraction failed.
+- Check the repository's [Issues page](https://github.com/Anas-Gazi/WeatherPaper/issues) for known problems.
+
+### Weather does not update
+
+WeatherPaper uses the Open-Meteo service for weather data. Check your internet connection and verify that the application can reach the service. Cached data and the bundled default theme may be used when live data is unavailable.
+
+### Automatic startup does not work
+
+Verify that the startup option was enabled and that the application still exists at the configured path. If you move or delete the portable folder after enabling startup, update or remove the startup entry.
+
+---
+
+## More information
+
+- [README.md](README.md) — Project overview and features
+- [USERGUIDE.md](USERGUIDE.md) — Using and configuring WeatherPaper
+- [GitHub Releases](https://github.com/Anas-Gazi/WeatherPaper/releases) — Published downloads
+- [GitHub Issues](https://github.com/Anas-Gazi/WeatherPaper/issues) — Bug reports and support

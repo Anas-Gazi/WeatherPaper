@@ -45,25 +45,66 @@ bundled theme automatically — see `src/app/CMakeLists.txt`):
 
 ## Building on Windows
 
-**Status: unverified in this repository's origin environment — see
-`ARCHITECTURE.md` section 6.** This is the single most valuable area for a
-Windows-owning contributor to help with.
+**Status:** The Windows application and console-free launcher have been built locally using MinGW-w64, Qt 6, CMake, and vcpkg. The installed application launcher has also been launched successfully. This confirms that the tested build can start; it does not establish that every Windows-specific feature or the final release packages have been fully verified.
 
-Expected toolchain: Visual Studio 2022 (MSVC) or MinGW-w64, CMake 3.20+,
-the Windows SDK (for `<shobjidl.h>`, `<wtsapi32.h>`, `<netlistmgr.h>`).
-libcurl and OpenSSL via [vcpkg](https://vcpkg.io) is the easiest path:
+### Prerequisites
+
+- Windows 10 or Windows 11
+- CMake 3.20 or newer
+- A C++20 compiler: MSVC or MinGW-w64
+- Qt 6 Widgets and the matching Qt deployment tools for the GUI
+- vcpkg with dependencies built for the same compiler and architecture
+- The Windows SDK for the relevant Win32 APIs
+
+**Toolchain compatibility matters:** Do not mix MSVC and MinGW binaries, Qt installations, or vcpkg libraries in the same build or release package.
+
+### Configure and build with MinGW-w64
+
+The following is a template. Replace the Qt and vcpkg paths with the locations on your machine.
 
 ```powershell
-vcpkg install curl:x64-windows openssl:x64-windows
-cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=[vcpkg root]/scripts/buildsystems/vcpkg.cmake
-cmake --build build --config RelWithDebInfo
-ctest --test-dir build -C RelWithDebInfo --output-on-failure
+cmake -S . -B build-windows `
+  -G "MinGW Makefiles" `
+  -DCMAKE_BUILD_TYPE=Release `
+  -DCMAKE_PREFIX_PATH="E:/path/to/Qt/mingw_64" `
+  -DCMAKE_TOOLCHAIN_FILE="E:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake" `
+  -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic `
+  -DWEATHERPAPER_BUILD_SETTINGS_UI=ON `
+  -DWEATHERPAPER_BUILD_TRAY_UI=ON `
+  -DWEATHERPAPER_BUILD_TESTS=OFF
+
+cmake --build build-windows --parallel
 ```
 
-`platform_windows` and `notify`'s/`tray_ui`'s Windows backends are written
-against the documented Win32/COM API surface but have never been compiled.
-If you hit a compile error there, it's very likely a real bug — please
-fix and send a PR rather than assuming it's intentional.
+Ensure that the MinGW compiler and make executable are available to CMake. Use a separate build directory for each compiler and toolchain.
+
+For MSVC, configure a separate build directory with a Visual Studio generator, an MSVC-compatible Qt installation, and an MSVC-compatible vcpkg triplet.
+
+### Windows runtime deployment
+
+A distributable GUI build needs the application binaries, their matching runtime dependencies, required Qt plugins, and the bundled theme assets.
+
+Use `windeployqt` from the same Qt installation used to compile the application. Verify the resulting package on a Windows environment that does not rely on development-tool paths or DLLs already present on the developer's machine.
+
+The repository's Windows packaging files are under `packaging/windows/`. Before publishing a release, verify that the packaging script stages both `WeatherPaper.exe` and `weatherpaperd.exe`, includes the required runtime and theme files, and reports failures correctly.
+
+### Verification checklist
+
+Test the following separately; a successful compile is not sufficient:
+
+- The `WeatherPaper.exe` launcher opens without an unwanted console window.
+- The main application starts and finds its bundled theme assets.
+- Wallpaper-setting behavior works on the target Windows version.
+- The settings window and system-tray interactions work.
+- Weather refresh and network error handling behave as expected.
+- Optional startup configuration and its removal work correctly.
+- The setup installer and portable ZIP both work when extracted or installed outside the development tree.
+- Uninstallation removes the application's startup registration when appropriate.
+
+### Reporting a Windows build issue
+
+Please include your Windows version, compiler and version, Qt version, vcpkg triplet, exact CMake command, and the complete error output. Reports about unverified features are useful even when the core application compiles successfully.
+
 
 ## Adding a new Linux desktop-environment backend
 

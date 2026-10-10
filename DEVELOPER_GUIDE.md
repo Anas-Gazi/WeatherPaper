@@ -20,6 +20,58 @@ If all of that works, you have a correct, fully-functional dev environment
 for everything except the Windows backend (needs Windows) and interactive
 tray/settings-window testing (needs a real desktop session).
 
+## Windows build workflow
+
+The Windows application and console-free launcher have been built locally with MinGW-w64 and Qt 6. The installed launcher has also been launched successfully. Full Windows feature and release-package verification is still required.
+
+### Toolchain requirements
+
+- Windows 10 or Windows 11
+- CMake 3.20+
+- A C++20 compiler: MinGW-w64 or MSVC
+- Qt 6 Widgets built for the same compiler
+- vcpkg dependencies built for the same compiler and architecture
+- The matching Qt deployment tool, `windeployqt`
+
+Do not reuse a CMake build directory across MSVC and MinGW toolchains.
+
+### Configure and compile with MinGW-w64
+
+Replace the example paths with your local installations:
+
+```powershell
+cmake -S . -B build-windows `
+  -G "MinGW Makefiles" `
+  -DCMAKE_BUILD_TYPE=Release `
+  -DCMAKE_PREFIX_PATH="E:/path/to/Qt/mingw_64" `
+  -DCMAKE_TOOLCHAIN_FILE="E:/path/to/vcpkg/scripts/buildsystems/vcpkg.cmake" `
+  -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic `
+  -DWEATHERPAPER_BUILD_SETTINGS_UI=ON `
+  -DWEATHERPAPER_BUILD_TRAY_UI=ON `
+  -DWEATHERPAPER_BUILD_TESTS=OFF
+
+cmake --build build-windows --parallel
+```
+
+Use an MSVC-specific build directory, Qt installation, Visual Studio generator, and vcpkg triplet if compiling with MSVC.
+
+### Windows packaging files
+
+| Purpose | File or directory |
+|---|---|
+| Console-free launcher source | `packaging/windows/weatherpaper_launcher.cpp` |
+| Inno Setup installer definition | `packaging/windows/weatherpaper.iss` |
+| Windows packaging script | `packaging/windows/build-windows.bat` |
+| Main application target | `weatherpaperd` |
+| User-facing launcher target | `WeatherPaper` |
+
+The release package must contain both executables, compatible runtime dependencies, Qt plugins, and the default theme assets. The installed asset layout places the executables under `bin` and the bundled theme under `share/weatherpaper/default_theme`; packaging may reorganize those files only if the application can still locate them.
+
+Before publishing a Windows release, test the setup installer and portable ZIP outside the development tree. Confirm that the launcher opens, the theme loads, wallpaper-setting behavior works, and optional startup configuration can be removed.
+
+See `CONTRIBUTING.md` for the complete Windows verification checklist.
+
+
 ## "Where do I find..." lookup table
 
 | I want to... | Look at |

@@ -1,23 +1,44 @@
 # WeatherPaper — User Guide
 
-WeatherPaper changes your desktop wallpaper to match the weather and time
-of day where you live. This guide covers installation and day-to-day use. If you're a
-developer looking to build or extend the app, see
-[`CONTRIBUTING.md`](CONTRIBUTING.md) and [`ARCHITECTURE.md`](ARCHITECTURE.md)
-instead.
+WeatherPaper changes your desktop wallpaper to match the weather and time of day where you live. This guide covers installation and day-to-day use. If you're a developer looking to build or extend the app, see [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`ARCHITECTURE.md`](ARCHITECTURE.md) instead.
 
 ## Installation & Setup
 
-WeatherPaper is designed to be extremely lightweight, taking virtually **0% CPU** at idle, **< 40 MB of RAM**, and **0 GPU resources** for static wallpapers.
+WeatherPaper is designed to be lightweight, with resource usage depending on the selected wallpaper, update interval, and enabled features.
 
 ### Windows 10 & Windows 11
 
-1. **⚡ One-Click Download:**
-   - Download [**`WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip).
-2. **Extract & Run:**
-   - Right-click the `.zip` file and click **Extract All...**.
-   - Double-click `install-portable.bat` to enable automatic weather-reactive wallpapers on startup.
-   - WeatherPaper immediately launches in your Windows system tray. Done!
+Download WeatherPaper from the [official GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases).
+
+**Option A — Windows Setup installer**
+
+1. Download `WeatherPaper-Setup-v1.0.0.exe` from the release assets, if available.
+2. Run the setup program and follow the wizard.
+3. Choose whether to create a desktop shortcut or enable automatic startup, if those options are presented.
+4. Launch WeatherPaper from the Start menu or desktop shortcut.
+
+**Option B — Portable ZIP**
+
+1. Download `WeatherPaper-v1.0.0-windows-x64.zip` from the release assets, if available.
+2. Right-click the ZIP file and select **Extract All...**.
+3. Open the extracted folder.
+4. Double-click `WeatherPaper.exe` to launch the application.
+
+Keep the executable files, required DLLs, Qt plugin directories, and theme assets together in the extracted folder.
+
+**Optional: automatic startup for the portable version**
+
+Run `install-portable.bat` from the extracted folder to configure automatic startup for the current Windows user. This script is for startup configuration; it is not the application launcher itself.
+
+To disable portable automatic startup, run `uninstall-portable.bat` if it is included in your package. Otherwise, remove only the `WeatherPaper` value from:
+
+`HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`
+
+Do not remove other registry values.
+
+For complete installation and removal instructions, see [`INSTALL.md`](INSTALL.md).
+
+> Release asset availability can change. If a package is not listed on the official Releases page, it has not been published there under that filename.
 
 ### Linux (All Distributions / Ubuntu / Debian / Fedora / Arch)
 
@@ -27,23 +48,28 @@ For direct download links, see the **[Installation Guide (INSTALL.md)](INSTALL.m
    - Download [`weatherpaper-installer.run`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run).
    - In your file manager, right-click → **Properties** → **Permissions** → check **"Allow executing file as program"**, then double-click.
    - Or run from terminal:
+
      ```bash
      chmod +x ~/Downloads/weatherpaper-installer.run
      ~/Downloads/weatherpaper-installer.run
      ```
+
    - Automatically installs the program, default themes, desktop launcher, and autostart on login (no `sudo` required).
 
 2. **Debian Package (`.deb`):**
    - Download [`weatherpaper-0.1.0-Linux.deb`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-0.1.0-Linux.deb).
    - Install via terminal:
+
      ```bash
      sudo dpkg -i weatherpaper-0.1.0-Linux.deb
      sudo apt-get install -f   # ensures any missing runtime libs are installed
      ```
+
    - Or right-click the `.deb` file in your file manager and select **Open With Software Install**.
 
 3. **Universal Linux Installer (Source / Non-root):**
    - If using Arch, Fedora, openSUSE, or installing from repository:
+
      ```bash
      ./packaging/linux/install.sh
      ```
@@ -52,28 +78,18 @@ For direct download links, see the **[Installation Guide (INSTALL.md)](INSTALL.m
 
 ## What you'll see
 
-Once running, WeatherPaper sits quietly in your system tray. Every 15–30
-minutes (configurable) it checks the weather for your location and, if the
-condition or time-of-day has changed enough to warrant it, crossfades to a
-new wallpaper that matches — for example, a rainy evening scene, or a
-clear night sky.
+Once running, WeatherPaper sits quietly in your system tray. Every 15–30 minutes (configurable) it checks the weather for your location and, if the condition or time-of-day has changed enough to warrant it, crossfades to a new wallpaper that matches — for example, a rainy evening scene, or a clear night sky.
 
-If you're offline, it keeps showing the last wallpaper it successfully
-resolved from cached weather data. If you've *never* been online (or the
-cache is unreadable), it falls back to a bundled default appropriate for
-the season.
+If you're offline, it keeps showing the last wallpaper it successfully resolved from cached weather data. If you've *never* been online (or the cache is unreadable), it falls back to a bundled default appropriate for the season.
 
 ## The tray icon
 
 Right-click (or left-click, depending on your desktop) the tray icon for:
 
-- **Pause / Resume auto-updates** — temporarily stop WeatherPaper from
-  checking the weather or changing your wallpaper, without quitting it.
-- **Refresh Now** — force an immediate weather check and wallpaper update,
-  instead of waiting for the next scheduled poll.
+- **Pause / Resume auto-updates** — temporarily stop WeatherPaper from checking the weather or changing your wallpaper, without quitting it.
+- **Refresh Now** — force an immediate weather check and wallpaper update, instead of waiting for the next scheduled poll.
 - **Open Settings...** — opens the settings window (see below).
-- **Open Gallery...** — jumps straight to the Gallery tab of the settings
-  window, where your own wallpapers live.
+- **Open Gallery...** — jumps straight to the Gallery tab of the settings window, where your own wallpapers live.
 - **Quit WeatherPaper**
 
 ## The settings window
@@ -82,20 +98,13 @@ The settings window has five sections, listed down the left side:
 
 ### General
 
-- **Location** — auto-detected by default; toggle off to enter one
-  manually if auto-detection isn't available on your system yet.
-- **Units** — Celsius or Fahrenheit, used for temperature display and for
-  the "extreme heat/cold" severe-weather threshold.
-- **Weather update interval** — how often WeatherPaper checks the weather,
-  from 15 to 30 minutes. Lower values are more responsive but use slightly
-  more network/battery.
+- **Location** — auto-detected by default; toggle off to enter one manually if auto-detection isn't available on your system yet.
+- **Units** — Celsius or Fahrenheit, used for temperature display and for the "extreme heat/cold" severe-weather threshold.
+- **Weather update interval** — how often WeatherPaper checks the weather, from 15 to 30 minutes. Lower values are more responsive but use slightly more network/battery.
 
 ### Themes
 
-Browse and manage installed theme packs. Each theme pack is a themed
-collection of wallpapers, already tagged for you by weather and time of
-day — install one and it's immediately usable. Uninstalling a pack removes
-its images and its tags, but never anything from your own Gallery.
+Browse and manage installed theme packs. Each theme pack is a themed collection of wallpapers, already tagged for you by weather and time of day — install one and it's immediately usable. Uninstalling a pack removes its images and its tags, but never anything from your own Gallery.
 
 ### Gallery
 
@@ -120,7 +129,9 @@ After adding a file, select it in the gallery list to edit its weather condition
 | **Tile** | Repeats the image at its original size to cover the screen — useful for small pattern images. |
 
 #### ⚡ Instant Wallpaper Refresh (No Restart Required!)
+
 Whenever you:
+
 - Check or uncheck a condition or time-of-day tag
 - Change the fit mode (e.g. Stretch, Fill, Fit)
 - Delete or add a wallpaper
@@ -130,47 +141,25 @@ WeatherPaper immediately updates your desktop background in less than **1 second
 
 ### Performance
 
-- **Enable animated/video wallpapers** — off by default. Turning this on
-  lets video/looping wallpapers play instead of just static images, at the
-  cost of higher CPU/GPU and battery use. Recommended only on machines
-  with a dedicated or reasonably capable integrated GPU.
-- **Pause animated wallpaper when...** — screen is locked / a fullscreen
-  app or game is active / battery saver is on. All on by default, so
-  animated wallpapers never compete with your game's frame rate or drain
-  your battery unnecessarily.
+- **Enable animated/video wallpapers** — off by default. Turning this on lets video/looping wallpapers play instead of just static images, at the cost of higher CPU/GPU and battery use. Recommended only on machines with a dedicated or reasonably capable integrated GPU.
+- **Pause animated wallpaper when...** — screen is locked / a fullscreen app or game is active / battery saver is on. All on by default, so animated wallpapers never compete with your game's frame rate or drain your battery unnecessarily.
 
 ### About / Updates
 
-Shows the currently installed versions of the core engine, the settings
-UI, and the asset catalog — these update independently of each other, so
-you might get a new theme pack without a full app update, or vice versa.
+Shows the currently installed versions of the core engine, the settings UI, and the asset catalog — these update independently of each other, so you might get a new theme pack without a full app update, or vice versa.
+
 **Check for Updates** looks for newer versions of any of the three.
 
 ## Severe weather alerts
 
-Off by default. If enabled, WeatherPaper will show a system notification
-for storms or extreme temperatures, sourced from the same weather check
-that drives your wallpaper — it never makes an extra network call just for
-this.
+Off by default. If enabled, WeatherPaper will show a system notification for storms or extreme temperatures, sourced from the same weather check that drives your wallpaper — it never makes an extra network call just for this.
 
 ## Troubleshooting
 
-**My wallpaper never changes.** Check that at least one theme pack (the
-bundled default counts) is installed, and that your system clock/timezone
-is correct — sunrise/sunset calculations depend on it.
+**My wallpaper never changes.** Check that at least one theme pack (the bundled default counts) is installed, and that your system clock/timezone is correct — sunrise/sunset calculations depend on it.
 
-**Wallpaper doesn't fill the whole screen the way I expect.** Check the
-fit mode for that specific image in the Gallery tab — it's set per-image,
-not globally.
+**Wallpaper doesn't fill the whole screen the way I expect.** Check the fit mode for that specific image in the Gallery tab — it's set per-image, not globally.
 
-**On Linux, nothing happens at all.** WeatherPaper needs to recognize your
-desktop environment to know how to set the wallpaper. It supports GNOME,
-KDE Plasma, XFCE, Cinnamon, MATE, Hyprland, and Sway out of the box, with a
-generic fallback for other X11 window managers (via `feh`, if installed).
-If none of these match your setup, please file an issue — see
-`CONTRIBUTING.md` for how to help add support for your desktop environment.
+**On Linux, nothing happens at all.** WeatherPaper needs to recognize your desktop environment to know how to set the wallpaper. It supports GNOME, KDE Plasma, XFCE, Cinnamon, MATE, Hyprland, and Sway out of the box, with a generic fallback for other X11 window managers (via `feh`, if installed). If none of these match your setup, please file an issue — see `CONTRIBUTING.md` for how to help add support for your desktop environment.
 
-**Video wallpaper doesn't appear even though I enabled it.** This is a
-known current limitation — see `ARCHITECTURE.md`'s verification-status
-notes. Static wallpapers are fully supported; video wallpaper rendering is
-still being finished .
+**Video wallpaper doesn't appear even though I enabled it.** This is a known current limitation — see `ARCHITECTURE.md`'s verification-status notes. Static wallpapers are supported; the final video-wallpaper presentation path is still being implemented.

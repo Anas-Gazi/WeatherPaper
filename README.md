@@ -1,122 +1,126 @@
 # WeatherPaper
 
-A cross-platform, modular, live weather-reactive wallpaper engine for
-**Windows 10/11** and **Linux** (GNOME, KDE Plasma, XFCE, Cinnamon, MATE,
-Hyprland, Sway). WeatherPaper automatically changes your desktop wallpaper
-based on live weather conditions and real sunrise/sunset-based time of day
-— and it's also a general-purpose static/video wallpaper engine you can
-drive with your own tagged images and clips.
+A cross-platform, modular, live weather-reactive wallpaper engine for **Windows 10/11** and **Linux** (GNOME, KDE Plasma, XFCE, Cinnamon, MATE, Hyprland, and Sway).
 
-Built in C++20 for a small footprint (installer target: under 25MB), zero
-busy-polling, and full offline unit-testability.
+WeatherPaper adapts your desktop wallpaper to live weather conditions and real sunrise/sunset-based time of day. It also supports a general-purpose wallpaper workflow using tagged images and video clips.
 
-## What it does
+Built in C++20 with a modular architecture, event-driven updates, and an offline-capable default theme.
 
-- Watches live weather (via [Open-Meteo](https://open-meteo.com), no
-  API key required) and switches wallpaper by condition — sunny, cloudy,
-  rain, snow, storm, fog, clear.
-- Computes time of day (morning/day/evening/night) from **real**
-  sunrise/sunset for your location, not fixed clock hours.
-- Supports static images and (opt-in, for capable hardware) short
-  looped video wallpapers.
-- Every wallpaper — bundled, downloaded, or your own — is matched by a
-  simple tag system, editable in the settings UI.
-- Downloadable theme packs, signed and checksum-verified.
-- Works fully offline: caches the last known weather, and falls back to
-  a bundled seasonal default if there's no cache at all.
-- Idle CPU near 0% — everything is event/timer-driven, nothing
-  busy-loops.
-- HTTPS-only networking, checksummed + signature-verified downloads,
-  no shell-injection surface anywhere file paths reach a subprocess.
+## Features
 
-## Status
+- **Weather-reactive wallpapers:** Switches wallpapers based on conditions such as sunny, cloudy, rain, snow, storm, fog, and clear.
+- **Sunrise/sunset-aware time of day:** Determines morning, day, evening, and night using actual sunrise and sunset data.
+- **Static and video wallpapers:** Supports images and optional video wallpapers on capable hardware.
+- **Tag-based matching:** Matches wallpapers to weather conditions and time-of-day tags.
+- **Theme packs:** Supports downloadable theme packs with integrity and signature verification.
+- **Offline fallback:** Caches weather data and falls back to bundled assets when live data is unavailable.
+- **Efficient updates:** Uses event-driven and timer-based processing rather than continuous busy polling.
+- **Cross-platform architecture:** Provides Windows and Linux platform backends.
 
-This is a from-scratch build with a genuinely modular architecture and a
-real, passing test suite — **129 unit tests across 11 suites, all green**
-— covering every OS-independent module. The Linux platform backend (DE
-detection + wallpaper-setting) is fully implemented and tested too, and the
-whole pipeline has been run end-to-end in this repository's build
-environment.
+Weather data is provided by [Open-Meteo](https://open-meteo.com), which does not require an API key for its standard weather API.
 
-The Windows platform backend and the WorkerW-style video-wallpaper
-compositor are written but **not yet verified on real hardware** — see
-[`ARCHITECTURE.md`](ARCHITECTURE.md) section "Verification status" for the
-exact, honest breakdown of what's tested versus what's a well-documented
-first draft, and [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to help close
-that gap.
+## Project status
 
-## Download & Installation
+WeatherPaper is actively developed. The project includes a modular C++20 codebase and unit tests for its core components.
 
-For full download links and step-by-step setup on Windows and Linux, read the **[Installation Guide (INSTALL.md)](INSTALL.md)**.
+The Windows and Linux implementations have different levels of platform-specific verification. See [ARCHITECTURE.md](ARCHITECTURE.md) and [CONTRIBUTING.md](CONTRIBUTING.md) for implementation details, verification status, and development instructions.
 
-### Windows 10 & Windows 11
-- **⚡ One-Click Download:** Download [**`WeatherPaper-v1.0.0-windows-x64.zip`**](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/WeatherPaper-v1.0.0-windows-x64.zip), extract with 1 click, and double-click `install-portable.bat` to launch and autostart on Windows.
+## Download and installation
 
-### Linux (All Distributions / Ubuntu / Debian / Fedora / Arch)
-- **⚡ One-Click Installer (`.run`):** Download [`weatherpaper-installer.run`](https://github.com/Anas-Gazi/WeatherPaper/releases/download/v0.1.0/weatherpaper-installer.run), run it, and it automatically installs all files, desktop shortcuts, autostart, and launches WeatherPaper.
-  ```bash
-  chmod +x weatherpaper-installer.run
-  ./weatherpaper-installer.run
-  ```
-- **Debian Package (.deb):**
-  ```bash
-  sudo dpkg -i weatherpaper-0.1.0-Linux.deb
-  sudo apt-get install -f
-  ```
-- **Universal Installer (Arch, Fedora, openSUSE, or non-root):**
-  ```bash
-  ./packaging/linux/install.sh
-  ```
-- **Build Release .deb Package:**
-  ```bash
-  ./packaging/linux/build-deb.sh
-  ```
+Download prebuilt packages from the **[GitHub Releases page](https://github.com/Anas-Gazi/WeatherPaper/releases)**.
 
-## Quick start (build from source)
+### Windows 10 and Windows 11
+
+Two package formats are intended to be available:
+
+| Package | Best for | Installation |
+|---|---|---|
+| **Windows Setup (`.exe`)** | Users who want a conventional installer | Run the setup program and follow the wizard. |
+| **Portable ZIP (`.zip`)** | Users who prefer extracting the application to a chosen folder | Extract the archive and run `WeatherPaper.exe`. |
+
+**Windows Setup**
+
+Download `WeatherPaper-Setup-v1.0.0.exe` from the release assets, run it, and follow the setup wizard. The installer can create shortcuts and offers optional startup configuration.
+
+**Portable ZIP**
+
+Download `WeatherPaper-v1.0.0-windows-x64.zip`, extract it to a folder, and run `WeatherPaper.exe`.
+
+To configure automatic startup for the portable version, run `install-portable.bat` from the extracted folder. This changes your current Windows user's startup configuration; it does not install the application system-wide.
+
+For complete instructions, troubleshooting, and removal steps, see [INSTALL.md](INSTALL.md).
+
+> The download links above require the corresponding files to be uploaded to GitHub Releases. If a file is not attached to the release yet, use the Releases page to check which packages are currently available.
+
+### Linux
+
+See [INSTALL.md](INSTALL.md) for Linux installation options, including Debian packages and the universal installer.
+
+## Build from source
+
+### Prerequisites
+
+On Ubuntu or Debian-based distributions:
 
 ```bash
+sudo apt-get update
 sudo apt-get install cmake build-essential libssl-dev libcurl4-openssl-dev qt6-base-dev libayatana-appindicator3-dev
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DWEATHERPAPER_BUILD_SETTINGS_UI=ON -DWEATHERPAPER_BUILD_TRAY_UI=ON
-cmake --build build -j$(nproc)
+```
+
+### Configure and build
+
+```bash
+cmake -S . -B build \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DWEATHERPAPER_BUILD_SETTINGS_UI=ON \
+  -DWEATHERPAPER_BUILD_TRAY_UI=ON
+
+cmake --build build -j"$(nproc)"
 ctest --test-dir build --output-on-failure
+```
+
+Run the application in one-shot mode:
+
+```bash
 ./build/src/app/weatherpaperd --once
 ```
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full build matrix
-(Windows, optional FFmpeg/tray/settings-UI components) and
-[`USERGUIDE.md`](USERGUIDE.md) for how to actually use the app once built.
+For Windows-specific build and packaging instructions, see [CONTRIBUTING.md](CONTRIBUTING.md) and the scripts under `packaging/windows/`.
 
-## Documentation map
+## Documentation
 
-| Document | For |
+| Document | Purpose |
 |---|---|
-| [`INSTALL.md`](INSTALL.md) | Download links, setup wizard, and manual installation guide |
-| [`USERGUIDE.md`](USERGUIDE.md) | End users — configuring, adding wallpapers, auto-start |
-| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Contributors — module map, dependency rules, security posture, verification status |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contributors — build instructions, adding a Linux DE backend, adding a theme pack |
-| [`DEVELOPER_GUIDE.md`](DEVELOPER_GUIDE.md) | New contributors — "where do I find X", "how do I extend Y" quick-reference |
+| [INSTALL.md](INSTALL.md) | Download, install, and uninstall instructions |
+| [USERGUIDE.md](USERGUIDE.md) | End-user configuration and wallpaper management |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | System architecture and design |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Build instructions and contribution guidelines |
+| [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) | Quick reference for developers |
 
 ## Repository layout
 
-```
+```text
 WeatherPaper/
+├── assets/
+│   └── default_theme/       # Bundled default wallpaper theme
 ├── src/
-│   ├── modules/            # 13 independent modules, each with its own CMakeLists.txt
+│   ├── modules/              # Reusable application modules
 │   ├── platform/
-│   │   ├── windows/        # Win32/COM wallpaper + OS-hooks backend
-│   │   └── linux/          # DE-detection + argv-based wallpaper backend
-│   └── app/                # weatherpaperd entry point (main.cpp)
-├── tests/                  # one doctest suite per testable module
-├── assets/default_theme/   # bundled offline default theme (placeholder art)
-├── third_party/            # vendored doctest + nlohmann/json (header-only)
-├── ARCHITECTURE.md
-├── CONTRIBUTING.md
+│   │   ├── windows/          # Windows platform backend
+│   │   └── linux/            # Linux platform backend
+│   └── app/                  # Application entry point and launcher target
+├── packaging/
+│   ├── windows/              # Windows installer and packaging scripts
+│   └── linux/                # Linux packaging and installation scripts
+├── tests/                    # Unit tests
+├── third_party/              # Vendored dependencies
+├── CMakeLists.txt
+├── INSTALL.md
 ├── USERGUIDE.md
-├── DEVELOPER_GUIDE.md
-└── CMakeLists.txt
+├── ARCHITECTURE.md
+└── CONTRIBUTING.md
 ```
 
-regardless.
+## License
 
-
-./build/src/app/weatherpaperd 
+WeatherPaper is licensed under the [GNU General Public License v3.0](LICENSE).
