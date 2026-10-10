@@ -1,24 +1,20 @@
 @echo off
-REM WeatherPaper Portable Windows Quick Autostart Setup
-REM Run this to enable WeatherPaper to start automatically on Windows logon
-
 setlocal
-set "EXE_PATH=%~dp0weatherpaperd.exe"
-if not exist "%EXE_PATH%" set "EXE_PATH=%~dp0bin\weatherpaperd.exe"
+set "APP_DIR=%~dp0"
+set "LAUNCHER=%APP_DIR%WeatherPaper.exe"
 
-if not exist "%EXE_PATH%" (
-    echo Error: weatherpaperd.exe not found in this folder!
+if not exist "%LAUNCHER%" (
+    echo Error: WeatherPaper.exe was not found.
+    echo Extract the complete ZIP before running this script.
     pause
     exit /b 1
 )
 
-echo Adding WeatherPaper to Windows startup...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "WeatherPaper" /t REG_SZ /d "\"%EXE_PATH%\"" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "WeatherPaper" /t REG_SZ /d "\"%LAUNCHER%\"" /f
 
-if %ERRORLEVEL% equ 0 (
-    echo [OK] WeatherPaper will now start automatically when you log into Windows!
+if errorlevel 1 (
+    echo Failed to configure automatic startup.
 ) else (
-    echo [ERROR] Failed to add registry key.
+    echo WeatherPaper will start automatically when you log in.
 )
-
 pause

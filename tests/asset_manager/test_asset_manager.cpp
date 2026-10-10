@@ -7,6 +7,13 @@
 #include <fstream>
 #include <unordered_map>
 
+#if defined(WEATHERPAPER_WITH_OPENSSL)
+#include <openssl/bio.h>
+#include <openssl/evp.h>
+#include <openssl/pem.h>
+#include <openssl/rsa.h>
+#endif
+
 #include "weatherpaper/asset_manager/asset_manager.hpp"
 
 using namespace weatherpaper::asset_manager;
@@ -255,34 +262,61 @@ TEST_CASE("ThemePackManager::install fails cleanly on a network error") {
 }
 
 #if defined(WEATHERPAPER_WITH_OPENSSL)
+
 TEST_CASE("verify_rsa_sha256_signature: real end-to-end sign/verify round trip") {
-    // Generates a throwaway RSA keypair at test time (openssl CLI, fixed
-    // literal command - see platform_linux/hooks_linux.cpp for why a fixed,
-    // non-interpolated popen()/system() command is safe) purely to
-    // exercise the verification function against real signature bytes
-    // rather than hand-crafted fixtures we couldn't otherwise validly
-    // produce.
-    const std::string dir = (fs::temp_directory_path() / "wp_am_sig_test").string();
-    fs::remove_all(dir);
-    fs::create_directories(dir);
-    const std::string priv = dir + "/key.pem";
-    const std::string pub = dir + "/pub.pem";
-    const std::string payload_path = dir + "/payload.txt";
-    const std::string sig_path = dir + "/sig.bin";
+    const std::string payload = "official-catalog-payload-v1";
 
-    REQUIRE(std::system(("openssl genrsa -out " + priv + " 2048 >/dev/null 2>&1").c_str()) == 0);
-    REQUIRE(std::system(("openssl rsa -in " + priv + " -pubout -out " + pub + " >/dev/null 2>&1").c_str()) == 0);
-    { std::ofstream(payload_path) << "official-catalog-payload-v1"; }
-    REQUIRE(std::system(("openssl dgst -sha256 -sign " + priv + " -out " + sig_path + " " + payload_path).c_str()) == 0);
+    EVP_PKEY_CTX* keygen_ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, nullptr);
+    REQUIRE(keygen_ctx != nullptr);
+    REQUIRE(EVP_PKEY_keygen_init(keygen_ctx) > 0);
+    REQUIRE(EVP_PKEY_CTX_set_rsa_keygen_bits(keygen_ctx, 2048) > 0);
 
-    std::ifstream pub_in(pub);
-    std::string pub_pem((std::istreambuf_iterator<char>(pub_in)), std::istreambuf_iterator<char>());
-    std::ifstream sig_in(sig_path, std::ios::binary);
-    std::string sig((std::istreambuf_iterator<char>(sig_in)), std::istreambuf_iterator<char>());
+    EVP_PKEY* key = nullptr;
+    const int keygen_result = EVP_PKEY_keygen(keygen_ctx, &key);
+    EVP_PKEY_CTX_free(keygen_ctx);
 
-    CHECK(verify_rsa_sha256_signature("official-catalog-payload-v1", sig, pub_pem));
-    CHECK_FALSE(verify_rsa_sha256_signature("TAMPERED-payload", sig, pub_pem));
+    REQUIRE(keygen_result > 0);
+    REQUIRE(key != nullptr);
 
-    fs::remove_all(dir);
+    BIO* public_key_bio = BIO_new(BIO_s_mem());
+    REQUIRE(public_key_bio != nullptr);
+    REQUIRE(PEM_write_bio_PUBKEY(public_key_bio, key) > 0);
+
+    char* public_key_data = nullptr;
+    const long public_key_length = BIO_get_mem_data(public_key_bio, &public_key_data);
+    REQUIRE(public_key_length > 0);
+    REQUIRE(public_key_data != nullptr);
+
+    const std::string public_key_pem(
+        public_key_data,
+        static_cast<std::size_t>(public_key_length)
+    );
+    BIO_free(public_key_bio);
+
+    EVP_MD_CTX* sign_ctx = EVP_MD_CTX_new();
+    REQUIRE(sign_ctx != nullptr);
+    REQUIRE(EVP_DigestSignInit(sign_ctx, nullptr, EVP_sha256(), nullptr, key) > 0);
+    REQUIRE(EVP_DigestSignUpdate(sign_ctx, payload.data(), payload.size()) > 0);
+
+    std::size_t signature_length = 0;
+    REQUIRE(EVP_DigestSignFinal(sign_ctx, nullptr, &signature_length) > 0);
+    REQUIRE(signature_length > 0);
+
+    std::string signature(signature_length, '\0');
+    REQUIRE(EVP_DigestSignFinal(
+        sign_ctx,
+        reinterpret_cast<unsigned char*>(signature.data()),
+        &signature_length
+    ) > 0);
+
+    signature.resize(signature_length);
+
+    EVP_MD_CTX_free(sign_ctx);
+    EVP_PKEY_free(key);
+
+    CHECK(verify_rsa_sha256_signature(payload, signature, public_key_pem));
+    CHECK_FALSE(verify_rsa_sha256_signature(
+        "TAMPERED-payload", signature, public_key_pem
+    ));
 }
 #endif

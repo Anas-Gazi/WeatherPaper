@@ -1,4 +1,4 @@
-# The weatherpaperd binary - orchestrates every module (see main.cpp's file
+﻿# The weatherpaperd binary - orchestrates every module (see main.cpp's file
 # header for why this is the one place allowed to depend on "everything").
 add_executable(weatherpaperd main.cpp)
 
@@ -44,3 +44,15 @@ install(TARGETS weatherpaperd
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     BUNDLE DESTINATION .
 )
+
+
+
+if(WIN32)
+    add_executable(WeatherPaper WIN32
+        "${CMAKE_SOURCE_DIR}/packaging/windows/weatherpaper_launcher.cpp"
+    )
+
+    install(TARGETS WeatherPaper
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+endif()

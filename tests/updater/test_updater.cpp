@@ -143,9 +143,11 @@ TEST_CASE("UpdateManager::apply_component_update verifies checksum and activates
 
     auto active_path = mgr.current_package_path("core");
     REQUIRE_FALSE(active_path.empty());
+    
     std::ifstream in(active_path, std::ios::binary);
     std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
     CHECK(content == package_bytes);
+    in.close();
 
     fs::remove_all(staging);
     fs::remove_all(install);
